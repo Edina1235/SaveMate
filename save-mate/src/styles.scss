@@ -1,0 +1,31 @@
+@import "./styles/variables.scss";
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    background-color: $light-green;
+}
+
+* {
+    transition: .3s ease;
+}
+
+//------------------------
+// MatDialog
+//------------------------
+
+.cdk-overlay-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.custom-dialog-panel {
+  position: absolute !important; 
+  top: calc(50px + 0.5rem);
+  right: 0.5rem;
+}

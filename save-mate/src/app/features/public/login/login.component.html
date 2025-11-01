@@ -1,0 +1,22 @@
+<div class="content">
+    <div class="login-container">
+        <img clas="icon" src="assets/images/icon/icon.png" alt="">
+        <div class="title">
+            <h1>Bejelentkezés</h1>
+        </div>
+        <form [formGroup]="loginForm">
+            <div class="form-group">  
+                <label for="emailOrUsername">Email/Felhasználónév</label>
+                <input id="emailOrUsername" type="text" formControlName="emailOrUsername">
+            </div>
+            <div class="form-group">
+                <label for="password">Jelszó</label>
+                <input id="password" type="password" formControlName="password">
+            </div>
+        </form>
+        <div class="button-container">
+            <button (click)="onClickLogin()">Bejelentkezés</button>
+        </div>
+    </div>
+    <p class="text">Még nincs fiókja? <span class="sign-up" (click)="onClickSignUp()">Regisztráljon</span></p>
+</div>
