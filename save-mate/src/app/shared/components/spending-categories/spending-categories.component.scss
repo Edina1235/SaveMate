@@ -1,0 +1,105 @@
+@import "src/styles/variables.scss";
+
+.spending-categories-container {
+    display: grid;
+    justify-content: center;
+    padding-top: 1rem;
+    color: $dark-green;
+
+    form {
+        display: grid;
+
+        .row {
+            display: grid;
+            align-items: center;
+            grid-template-columns: auto 1rem 1fr auto;
+            grid-template-areas: "checkbox icon name chevron";
+            gap: 0.5rem;
+            padding: 0.5rem;
+
+            &.active {
+                background-color: $light-gray;
+                border-radius: 10px;
+                grid-template-rows: auto 1fr;
+                grid-template-areas: "checkbox icon name chevron"
+                                    "line line line line"
+                                    "details details details details";
+            }
+
+            .line {
+                grid-area: line;
+                height: 1px;
+                width: 100%;
+                background-color: $white;
+            }
+
+            input {
+                grid-area: checkbox;
+            }
+
+            i {
+                grid-area: icon;
+                font-size: 1rem;
+
+                &.fa-house {
+                    color: $home-color;
+                }
+
+                &.fa-bus {
+                    color: $public-transport-color;
+                }
+
+                &.fa-utensils {
+                    color: $food-color;
+                }
+
+                &.fa-stethoscope {
+                    color: $health-color;
+                }
+
+                &.fa-cart-shopping {
+                    color: $shopping-color;
+                }
+
+                &.fa-music {
+                    color: $recreation-color;
+                }
+
+                &.fa-children {
+                    color: $family-color;
+                }
+
+                &.fa-money-bills {
+                    color: $credit-color;
+                }
+
+                &.fa-building-columns {
+                    color: $insurance-color;
+                }
+
+                &.fa-piggy-bank {
+                    color: $save-color;
+                }
+
+                &.fa-screwdriver-wrench {
+                    color: $other-color;
+                }
+            }
+
+            .fa-chevron-down, .fa-chevron-up {
+                grid-area: chevron;
+                margin-left: 1rem;
+            }
+
+            .name {
+                grid-area: name;
+                margin-left: 0.5rem;
+            }
+
+            .details {
+                grid-area: details;
+                max-width: 100%;
+            }
+        }
+    } 
+}

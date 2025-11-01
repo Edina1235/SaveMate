@@ -1,0 +1,21 @@
+<div class="spending-categories-container">
+    <form>
+        <div *ngFor="let category of categories; let i = index" class="row" [ngClass]="{'active': activeCategory === category}">
+            <input type="checkbox"/>
+            <i [class]="categoriesIcon[i]"></i>
+            <div class="name">{{ category }}</div>
+            <ng-container *ngIf="category !== activeCategory else chevronUp">
+                <i class="fa-solid fa-chevron-down"
+                   (click)="onClickArrow(category)"></i>
+            </ng-container>
+            <ng-template #chevronUp>
+                <i class="fa-solid fa-chevron-up"
+                   (click)="onClickArrow(category)"></i>   
+                <div class="line"></div>
+                <div class="details">
+                    <app-details [activeCategory]="category"></app-details>
+                </div>
+            </ng-template>
+        </div>
+    </form>
+</div>

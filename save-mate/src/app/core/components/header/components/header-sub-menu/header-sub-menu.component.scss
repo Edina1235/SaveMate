@@ -1,0 +1,68 @@
+@import "src/styles/variables.scss";
+
+.header-sub-menu-container {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    background-color: $light-green;
+    width: 200px;
+
+    .header {
+        height: 50px;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        color: $white;
+        background-color: $header-color;
+        text-align: start;
+
+        .monogram-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            aspect-ratio: 1/1;
+            gap: 0.125rem;
+            color: $white;
+            background-color: $dark-green;
+            border-radius: 50%;
+            margin: 0.5rem;
+            max-height: 100%;
+        }
+
+        .name {
+            margin: auto 0;
+        }
+    }
+
+    .navigation nav {
+        display: grid;
+
+        a {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+
+            .notification-sign {
+                height: 0.5rem;
+                width: 0.5rem;
+                border-radius: 50%;
+                background-color: #ffa500;
+            }
+        }
+        
+        a, button {
+            font-family: inherit;
+            text-decoration: none;
+            color: $white;
+            border: none;
+            background-color: transparent;
+            padding: 0.5rem;
+            text-align: start;
+            font-size: 1rem;
+
+            &:hover {
+                cursor: pointer;
+                background-color: $green;
+            }
+        }
+    }
+}

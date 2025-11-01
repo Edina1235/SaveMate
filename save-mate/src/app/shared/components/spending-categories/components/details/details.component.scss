@@ -1,0 +1,12 @@
+@import "src/styles/variables.scss";
+
+.details-container {
+    margin: 0 1rem;
+    font-style: italic;
+    color: $dark-green;
+    text-wrap: wrap;
+
+    .details-text {
+        max-width: 100%;
+    }
+}

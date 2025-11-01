@@ -1,0 +1,79 @@
+@import "src/styles/variables.scss";
+
+.header-container {
+    display: grid;
+    grid-template-columns: 50px 1fr 50px;
+    height: 50px;
+    background-color: $header-color;
+    border-radius: 0 0 10px 10px;
+
+    img.icon {
+        padding: 0.5rem;
+        width: calc(50px - 1rem);
+    }
+
+    .navigation {
+        display: grid;
+        justify-content: center;
+
+        nav {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            text-align: center;
+            gap: 0.5rem;
+
+            a {
+                color: $white;
+                text-decoration: none;
+                font-size: 1.2rem;
+                display: grid;
+                align-items: center;
+                padding: 0.5rem;
+
+                &.active {
+                    background-color: $dark-green;
+                    scale: 1.1;
+                    border-radius: 0 0 5px 5px;
+
+                    &:hover {
+                        filter: brightness(0.95);
+                    }
+                }
+
+                &:not(.active):hover {
+                    background-color: rgba(0, 0, 0, 0.2);
+                }
+            }
+        }
+    }
+
+    .sub-menu {
+        position: relative;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        .notification-icon {
+            position: absolute;
+            top: 0.3rem;
+            right: 0.3rem;
+            font-size: 0.8rem;
+            color: #ffa500;
+        }
+
+        .monogram-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            aspect-ratio: 1/1;
+            gap: 0.125rem;
+            color: $white;
+            background-color: $dark-green;
+            border-radius: 50%;
+            margin: 0.5rem;
+            height: 100%;
+        }
+    }
+}

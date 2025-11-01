@@ -1,0 +1,42 @@
+<div class="content">
+    <div class="sign-up-container">
+        <div class="icon">
+            <img src="assets/images/icon/icon.png" alt="">
+        </div>
+        <div class="title">
+            <h1>Regisztráció</h1>
+        </div>
+        <form [formGroup]="signUpForm">
+            <div class="row">
+                <div class="form-group">
+                    <label for="lastName">Vezetéknév</label>
+                    <input id="lastName" type="text" formControlName="lastName">
+                </div>
+                <div class="form-group">
+                    <label for="firstName">Keresztnév</label>
+                    <input id="firstName" type="text" formControlName="firstName">
+                </div>
+            </div>
+            <div class="form-group"> 
+                <label for="nickName">Felhasználónév</label>
+                <input id="nickName" type="text" formControlName="nickName">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" type="text" formControlName="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Jelszó</label>
+                <input id="password" type="password" formControlName="password">
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Jelszó megerősítése</label>
+                <input id="confirmPassword" type="password" formControlName="confirmPassword">
+            </div>
+        </form>
+        <div class="button-container">
+            <button (click)="onClickSignUp()">Regisztráció</button>
+        </div>
+    </div>
+    <p class="text">Már van fiókja? <span class="login" (click)="onClickLogin()">Jelentkezzen be</span></p>
+</div>
