@@ -1,0 +1,62 @@
+<div class="debts-container">
+    <form [formGroup]="debtsGroup">
+        <h1>Milyen tartozásai vannak és mi az összegük?</h1>
+        <ng-container *ngFor="let index of indexes"> <!-- ide ngfor -->
+            <div class="row">
+                <div class="form-group">
+                    <label for="name">Név</label>
+                    <input id="name" type="text" [formControlName]="'name' + index"/>
+                </div>
+                <div class="form-group">
+                    <label for="amount">Fennmaradó összeg</label>
+                    <div class="input-wrapper">
+                        <input id="amount" type="number" [formControlName]="'amount' + index"/>
+                        <span class="suffix">Ft</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="monthly-amount">Havonta fizetendő</label>
+                    <div class="input-wrapper">
+                        <input id="monthly-amount" type="number" [formControlName]="'monthlyAmount' + index"/>
+                        <span class="suffix">Ft/hó</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="interest">Kamat</label>
+                    <div class="input-wrapper">
+                        <input id="interest" type="number" [formControlName]="'interest' + index"/>
+                        <span class="suffix">%</span>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <div class="new-row-container">
+            <button class="new-row-button"
+                    (click)="onClickNewRow()">
+                    <i class="fa-solid fa-plus"></i>
+            </button>
+            <div class="amount">
+                <div class="number">
+                    {{totalAmount}}
+                </div>
+                <div class="currency">
+                    Ft
+                </div>
+            </div>
+            <div class="monthly-amount">
+                <div class="number">
+                    {{monthlyAmount}}
+                </div>
+                <div class="currency">
+                    Ft/hó
+                </div>
+            </div>
+        </div>
+    </form>
+    <button class="next-button"
+            [disabled]="getNameByIndex(1) === ''
+                        || getAmountByIndex(1) === ''
+                        || getInterestByIndex(1) === ''
+                        || getMonthlyAmountByIndex(1) === ''"
+            (click)="onClickNext()">Következő</button>
+</div>

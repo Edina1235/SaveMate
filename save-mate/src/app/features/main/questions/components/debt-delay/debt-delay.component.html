@@ -1,0 +1,25 @@
+<div class="debt-delay-container">
+    <form [formGroup]="debtDelayGroup">
+        <h1>Van elmaradása vagy késedelme?</h1>
+        <div class="row">
+            <div class="yes-group">
+                <input id="yes" type="radio" formControlName="debtDelay" value="yes">
+                <label for="yes">Igen</label>
+            </div>
+            <div class="no-group">
+                <input id="no" type="radio" formControlName="debtDelay" value="no">
+                <label for="no">Nem</label>
+            </div>
+        </div>
+        <h2>Ha igen, melyik tartozáshoz?</h2>
+        <ng-container *ngFor="let debt of debts; let i = index">
+            <div class="debt-row">
+                <input [id]="'debt'+ i" type="checkbox" [formControlName]="'debt'+ i">
+                <label [for]="'debt'+ i">{{debt.name}}</label>
+            </div>
+        </ng-container>
+    </form>
+    <button class="next-button"
+            [disabled]="!enabledButton"
+            (click)="onClickNext()">Következő</button>
+</div>

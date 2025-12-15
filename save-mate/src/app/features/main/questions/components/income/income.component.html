@@ -1,0 +1,12 @@
+<div class="income-container">
+    <form [formGroup]="incomeGroup">
+        <div class="form-group">
+            <label class="question" for="income">Mennyi a havi nettó jövedelme?</label>
+            <div class="input-wrapper">
+                <input id="income" type="number" formControlName="income" />
+                <span class="suffix">Ft</span>
+            </div>
+        </div>
+    </form>
+    <button class="next-button" [disabled]="income === ''" (click)="onClickNext()">Következő</button>
+</div>

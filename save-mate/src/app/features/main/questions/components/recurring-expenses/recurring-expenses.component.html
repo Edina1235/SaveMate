@@ -1,0 +1,16 @@
+<div class="recurring-expenses-container">
+    <form [formGroup]="recurringExpensesGroup">
+        <label class="question" for="recurring-expenses">Melyek a fix költségek?</label>
+        <app-spending-categories></app-spending-categories>
+        <div class="form-group">
+            <label for="avg">Fix költségek átlagosan:</label>
+            <div class="input-wrapper">
+                <input type="number" id="avg" formControlName="avg">
+                <span class="suffix">Ft</span>
+            </div>
+        </div>
+    </form>
+    <button class="next-button"
+            [disabled]="avg === ''"
+            (click)="onClickNext()">Következő</button>
+</div>

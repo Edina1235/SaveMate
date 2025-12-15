@@ -1,6 +1,38 @@
 <div class="questions-container">
-    <div class="question-container">
-        <app-spending-categories></app-spending-categories>
+    <div class="question-container" [ngSwitch]="activeStep">
+        <ng-container *ngSwitchCase="QuestionSteps.Income">
+            <app-income class="step-container"></app-income>
+        </ng-container>
+        <ng-container *ngSwitchCase="QuestionSteps.SavedAmount">
+            <app-saved-amount class="step-container"></app-saved-amount>
+        </ng-container>
+        <ng-container *ngSwitchCase="QuestionSteps.Goals">
+            <app-goals class="step-container"></app-goals>
+        </ng-container>
+        <ng-container *ngSwitchCase="QuestionSteps.GoalDeadline">
+            <app-goal-deadline class="step-container"></app-goal-deadline>
+        </ng-container>
+        <ng-container *ngSwitchCase="QuestionSteps.RecurringExpenses">
+            <app-recurring-expenses class="step-container"></app-recurring-expenses>
+        </ng-container>
+        <ng-container *ngSwitchCase="QuestionSteps.Expenses">
+            <app-expenses class="step-container"></app-expenses>
+        </ng-container>
+        <ng-container *ngSwitchCase="QuestionSteps.PreviousMonthExpenses">
+            <app-previous-month-expenses class="step-container"></app-previous-month-expenses>
+        </ng-container>
+        <ng-container *ngSwitchCase="QuestionSteps.DebtQuestion">
+            <app-debt-question class="step-container"></app-debt-question>
+        </ng-container>
+        <ng-container *ngSwitchCase="QuestionSteps.Debts">
+            <app-debts class="step-container"></app-debts>
+        </ng-container>
+        <ng-container *ngSwitchCase="QuestionSteps.DebtDelay">
+            <app-debt-delay class="step-container"></app-debt-delay>
+        </ng-container>
+        <ng-container *ngSwitchCase="QuestionSteps.Prepayment">
+            <app-prepayment class="step-container"></app-prepayment>
+        </ng-container>
     </div>
     <img src="assets/images/background-img.png" alt="">
 </div>

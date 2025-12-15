@@ -1,0 +1,22 @@
+<div class="goal-deadline-container">
+    <form [formGroup]="goalDeadline">
+        <label class="question" for="deadline">Milyen távon szeretne spórolni?</label>
+        <div class="row">
+            <div class="short-group">
+                <input type="radio" id="short" formControlName="deadline" value="short">
+                <label for="short">Rövidebb</label>
+            </div>
+            <div class="long-group">
+                <input type="radio" id="long" formControlName="deadline" value="long">
+                <label type="long">Hosszabb</label>
+            </div>
+        </div>
+        <div class="input-wrapper">
+            <input type="number" id="deadline" formControlName="years">
+            <span class="suffix">Év</span>
+        </div>
+    </form>
+    <button class="next-button"
+            [disabled]="years === ''"
+            (click)="onClickNext()">Következő</button>
+</div>

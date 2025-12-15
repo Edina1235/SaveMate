@@ -1,0 +1,13 @@
+<div class="prepayment-container">
+    <form [formGroup]="debtsGroup">
+        <h1>Melyik tartozásnál van lehetőség előtörlesztésre?</h1>
+        <ng-container *ngFor="let debt of debts; let i = index">
+            <div class="row">
+                <input [id]="'debt'+ i" type="checkbox" [formControlName]="'debt'+ i">
+                <label [for]="'debt'+ i">{{debt.name}}</label>
+            </div>
+        </ng-container>
+    </form>
+    <button class="next-button"
+            (click)="onClickFinish()">Befejez</button>
+</div>

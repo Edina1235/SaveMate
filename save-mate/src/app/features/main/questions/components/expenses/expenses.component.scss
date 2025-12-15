@@ -1,0 +1,45 @@
+@import "src/styles/variables.scss";
+
+.expenses-container {
+    height: 100%;
+    display: grid;
+    align-items: center;
+    grid-template-rows: 1fr auto;
+    color: $dark-green;
+    overflow: hidden;
+
+    form {
+        max-height: 100%;
+        display: grid;
+        justify-content: center;
+        gap: 1rem;
+        overflow: auto;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            width: 0;
+        }
+
+        .question {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+
+        .form-group {
+            display: grid;
+            gap: 1rem;
+            color: $dark-green;
+
+            input {
+                background-color: transparent;
+                border: none;
+                border-bottom: 1px solid $dark-green;
+
+                &:focus-visible {
+                    outline: none;
+                }
+            }
+        }
+    }
+}

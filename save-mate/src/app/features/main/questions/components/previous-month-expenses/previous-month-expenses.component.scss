@@ -1,0 +1,159 @@
+@import "src/styles/variables.scss";
+
+.previous-month-expenses-container {
+    height: 100%;
+    display: grid;
+    align-items: center;
+    grid-template-rows: 1fr auto;
+    color: $dark-green;
+    overflow: hidden;
+
+    form {
+        max-height: 100%;
+        display: grid;
+        justify-content: center;
+        gap: 1rem;
+        overflow: auto;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            width: 0;
+        }
+
+        h1 {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: grid;
+
+            .suffix {
+                position: absolute;
+                bottom: 0.25rem;
+                right: 0.5rem;
+                opacity: 0.8;
+                font-size: 0.9rem;
+            }
+        }
+
+        .add-file-button {
+            position: relative;
+            height: 2rem;
+            width: 2rem;
+            border-radius: 50%;
+            background-color: $dark-green;
+
+            input {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+            }
+
+            i {
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: grid;
+                justify-content: center;
+                align-items: center;
+                color: $white;
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        .new-row-button {
+            position: relative;
+            height: 2rem;
+            width: 2rem;
+            border-radius: 50%;
+            background-color: $dark-green;
+            border: none;
+
+            i {
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: grid;
+                justify-content: center;
+                align-items: center;
+                color: $white;
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        .form-group {
+            display: grid;
+            gap: 1rem;
+            color: $dark-green;
+
+            .row {
+                display: grid;
+                grid-template-columns: auto 1fr;
+                gap: 0.5rem;
+            }
+
+            select option {
+                i {
+                    &.fa-house {
+                        color: $home-color;
+                    }
+
+                    &.fa-bus {
+                        color: $public-transport-color;
+                    }
+
+                    &.fa-utensils {
+                        color: $food-color;
+                    }
+
+                    &.fa-stethoscope {
+                        color: $health-color;
+                    }
+
+                    &.fa-cart-shopping {
+                        color: $shopping-color;
+                    }
+
+                    &.fa-music {
+                        color: $recreation-color;
+                    }
+
+                    &.fa-children {
+                        color: $family-color;
+                    }
+
+                    &.fa-money-bills {
+                        color: $credit-color;
+                    }
+
+                    &.fa-building-columns {
+                        color: $insurance-color;
+                    }
+
+                    &.fa-piggy-bank {
+                        color: $save-color;
+                    }
+
+                    &.fa-screwdriver-wrench {
+                        color: $other-color;
+                    }
+                }
+            }
+
+            input {
+                background-color: transparent;
+                border: none;
+                border-bottom: 1px solid $dark-green;
+
+                &:focus-visible {
+                    outline: none;
+                }
+            }
+        }
+    }
+}

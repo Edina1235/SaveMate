@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { KnowledgeBaseComponent } from './knowledge-base.component';
 import { RouterModule } from '@angular/router';
 
@@ -10,7 +9,6 @@ import { RouterModule } from '@angular/router';
     KnowledgeBaseComponent
   ],
   imports: [
-    CommonModule,
     RouterModule.forChild([
       { path: '', component: KnowledgeBaseComponent },
     ])

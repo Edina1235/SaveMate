@@ -1,0 +1,108 @@
+@import "src/styles/variables.scss";
+
+.debts-container {
+    height: 100%;
+    display: grid;
+    align-items: center;
+    grid-template-rows: 1fr auto;
+    color: $dark-green;
+    overflow: hidden;
+
+    form {
+        max-height: 100%;
+        display: grid;
+        justify-content: center;
+        gap: 1rem;
+        overflow: auto;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            width: 0;
+        }
+
+        h1 {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+        
+        .input-wrapper {
+            position: relative;
+
+            .suffix {
+                position: absolute;
+                bottom: 0.25rem;
+                right: 0.5rem;
+                opacity: 0.8;
+                font-size: 0.9rem;
+            }
+        }
+
+        .new-row-button {
+            position: relative;
+            height: 2rem;
+            width: 2rem;
+            border-radius: 50%;
+            background-color: $dark-green;
+            border: none;
+
+            i {
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: grid;
+                justify-content: center;
+                align-items: center;
+                color: $white;
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        .new-row-container {
+            display: grid;
+            grid-template-columns: auto 1fr 1fr;
+            gap: 1rem;
+
+            .amount, .monthly-amount {
+                display: grid;
+                grid-template-columns: 1fr auto;
+                border: 1px solid $dark-green;
+                border-radius: 10px;
+                padding: 0.5rem;
+                align-items: center;
+
+                .number, .currency {
+                    color: $dark-green;
+                }
+
+                .currency {
+                    opacity: 0.8;
+                }
+            }
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: grid;
+            gap: 1rem;
+            color: $dark-green;
+
+            input {
+                background-color: transparent;
+                border: none;
+                border-bottom: 1px solid $dark-green;
+                width: 100%;
+
+                &:focus-visible {
+                    outline: none;
+                }
+            }
+        }
+    }
+}
