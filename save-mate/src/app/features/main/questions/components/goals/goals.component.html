@@ -1,0 +1,21 @@
+<div class="goals-container">
+    <form [formGroup]="goalsForm"> 
+        <h1>Mi a célja a spórolással?</h1>
+        <ng-container *ngFor="let goal of goals; let i = index">
+            <div class="row">
+                <input [id]="'goal'+ i" type="checkbox" [formControlName]="'goal' + i"/>
+                <label [for]="'goal' + i">{{goal.valueOf()}}</label>
+            </div>
+        </ng-container>
+        <div class="form-group">
+            <div class="row">
+                <input id="other" type="checkbox" formControlName="other"/>
+                <label for="other">Egyéb:</label>
+            </div>
+            <input id="other" type="text" formControlName="otherName"/>
+        </div>
+    </form>
+    <button class="next-button"
+            [disabled]="!isButtonActive()"
+            (click)="onClickNext()">Következő</button>
+</div>

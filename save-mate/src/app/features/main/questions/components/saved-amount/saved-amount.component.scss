@@ -1,0 +1,57 @@
+@import "src/styles/variables.scss";
+
+.saved-amount-container {
+    height: 100%;
+    display: grid;
+    align-items: center;
+    grid-template-rows: 1fr auto;
+    color: $dark-green;
+    overflow: hidden;
+
+    form {
+        max-height: 100%;
+        display: grid;
+        justify-content: center;
+        overflow: auto;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            width: 0;
+        }
+
+        .question {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+
+        .input-wrapper {
+            position: relative;
+
+            .suffix {
+                position: absolute;
+                bottom: 0.25rem;
+                right: 0.5rem;
+                opacity: 0.8;
+                font-size: 0.9rem;
+            }
+        }
+
+        .form-group {
+            display: grid;
+            gap: 1rem;
+            color: $dark-green;
+
+            input {
+                background-color: transparent;
+                border: none;
+                border-bottom: 1px solid $dark-green;
+                width: 100%;
+
+                &:focus-visible {
+                    outline: none;
+                }
+            }
+        }
+    }
+}

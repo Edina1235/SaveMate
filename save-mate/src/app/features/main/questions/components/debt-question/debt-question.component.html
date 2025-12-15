@@ -1,0 +1,23 @@
+<div class="debt-question-container">
+    <form [formGroup]="debtQuestionGroup">
+        <label class="question" for="debt">Van tartozása, ami törlesztésre vár?</label>
+        <div class="row">
+            <div class="yes-group">
+                <input id="yes" type="radio" formControlName="debt" value="yes">
+                <label for="yes">Igen</label>
+            </div>
+            <div class="no-group">
+                <input id="no" type="radio" formControlName="debt" value="no">
+                <label for="no">Nem</label>
+            </div>
+        </div>
+    </form>
+    <ng-container *ngIf="debt === 'no' else nextButton">
+        <button class="next-button"
+                (click)="onClickFinish()">Befejez</button>
+    </ng-container>
+    <ng-template #nextButton>
+        <button class="next-button"
+                (click)="onClickNext()">Következő</button>
+    </ng-template>
+</div>

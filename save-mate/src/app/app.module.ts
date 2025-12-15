@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './features/public/login/login.component';
 import { SignUpComponent } from './features/public/sign-up/sign-up.component';
 import { SpendingCategoriesComponent } from './shared/components/spending-categories/spending-categories.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { SpendingCategoriesComponent } from './shared/components/spending-catego
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     MatDialogModule,
     ReactiveFormsModule

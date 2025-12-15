@@ -6,6 +6,15 @@
     grid-template-columns: 1fr auto;
     background-color: $white;
 
+    .question-container {
+        padding: 0.5rem;
+        overflow: hidden;
+    }
+
+    .step-container {
+        overflow: hidden;
+    }
+
     img {
         height: 100vh;
     }

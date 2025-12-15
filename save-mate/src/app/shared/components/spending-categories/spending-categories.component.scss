@@ -3,7 +3,6 @@
 .spending-categories-container {
     display: grid;
     justify-content: center;
-    padding-top: 1rem;
     color: $dark-green;
 
     form {
@@ -37,52 +36,32 @@
                 grid-area: checkbox;
             }
 
-            i {
-                grid-area: icon;
-                font-size: 1rem;
+            input[type='checkbox'] {
+                position: relative;
+                height: 1rem;
+                width: 1rem;
+                border-radius: 5px;
+                border: 1px solid $dark-green;
+                accent-color: $dark-green;
+                appearance: none;
+                -webkit-appearance: none;
 
-                &.fa-house {
-                    color: $home-color;
-                }
+                &:checked {
+                    background-color: $dark-green;
+                    border: 1px solid $dark-green;
 
-                &.fa-bus {
-                    color: $public-transport-color;
-                }
-
-                &.fa-utensils {
-                    color: $food-color;
-                }
-
-                &.fa-stethoscope {
-                    color: $health-color;
-                }
-
-                &.fa-cart-shopping {
-                    color: $shopping-color;
-                }
-
-                &.fa-music {
-                    color: $recreation-color;
-                }
-
-                &.fa-children {
-                    color: $family-color;
-                }
-
-                &.fa-money-bills {
-                    color: $credit-color;
-                }
-
-                &.fa-building-columns {
-                    color: $insurance-color;
-                }
-
-                &.fa-piggy-bank {
-                    color: $save-color;
-                }
-
-                &.fa-screwdriver-wrench {
-                    color: $other-color;
+                    &::after {
+                        display: grid;
+                        justify-content: center;
+                        align-items: center;
+                        content: "✔";
+                        color: white;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        font-size: 0.65rem;
+                    }
                 }
             }
 

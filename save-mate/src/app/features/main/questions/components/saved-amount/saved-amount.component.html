@@ -1,0 +1,14 @@
+<div class="saved-amount-container">
+    <form [formGroup]="savedAmountGroup">
+        <div class="form-group">
+            <label class="question" for="saved-amount">Mennyi megtakarítása van?</label>
+             <div class="input-wrapper">
+                <input id="saved-amount" type="number" formControlName="savedAmount"/>
+                <span class="suffix">Ft</span>
+            </div>
+        </div>
+    </form>
+    <button class="next-button"
+            [disabled]="savedAmount === ''"
+            (click)="onClickNext()">Következő</button>
+</div>

@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { StatisticsComponent } from './statistics.component';
 import { RouterModule } from '@angular/router';
 
@@ -10,7 +9,6 @@ import { RouterModule } from '@angular/router';
     StatisticsComponent
   ],
   imports: [
-    CommonModule,
     RouterModule.forChild([
       { path: '', component: StatisticsComponent },
     ])
