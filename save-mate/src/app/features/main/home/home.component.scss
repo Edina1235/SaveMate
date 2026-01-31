@@ -1,0 +1,106 @@
+@import "src/styles/variables.scss";
+
+.home-container {
+    display: grid; 
+    max-height: 100%;
+    width: clamp(340px, 60vw, 1000px);
+    grid-template-columns: 1fr 1fr;
+    margin: 0.5rem auto;
+    gap: 0.5rem;
+
+    @media screen and (max-width: 660px) {
+        grid-template-columns: 1fr;
+
+        .card, .card-with-plus {
+            min-height: 6rem !important;
+        } 
+
+        .amount {
+            font-size: 1.25rem !important;
+        }
+
+        .income .content {
+            .current .amount {
+                font-size: 1.5rem !important;
+            }
+        }
+    }
+
+    .chart, .chart-debt {
+        height: 100%;
+        width: 100%;
+    }
+
+    .card, .card-with-plus {
+        min-height: 12rem;
+    }
+
+    .income, .saving, .recurring-expenses {
+        .content {
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    .label, .max {
+        color: $light-green;
+    }
+
+    .current .amount {
+        color: $dark-green;
+    }
+
+    .amount {
+        font-weight: bold;
+        font-size: 2rem;
+    }
+
+    .label {
+        font-style: italic;
+        font-weight: 600;
+    }
+
+    .current, .max {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .income .content {
+        .current .amount {
+            font-size: 2.5rem;
+        }
+    }
+
+    .categories-to-reduce .content {
+        padding: 0.5rem;
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            justify-content: end;
+            text-align: center;
+
+            span {
+                color: rgba($green, 0.75);
+                font-size: 1.2rem;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+:host {
+    overflow: auto;
+    scrollbar-width: 0;
+
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+}

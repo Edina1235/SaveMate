@@ -24,6 +24,7 @@ export class HeaderComponent {
       .subscribe((event: any) => {
         const hiddenRoutes = [AppUrl.Questions];
         this.showHeader = !hiddenRoutes.includes(event.urlAfterRedirects);
+        console.log(this.showHeader);
       });
   }
 
@@ -34,5 +35,9 @@ export class HeaderComponent {
       disableClose: false,
       hasBackdrop: true
     });
+  }
+
+  public onClickIcon() {
+    this.router.navigateByUrl(AppUrl.Home);
   }
 }

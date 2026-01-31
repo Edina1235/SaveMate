@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppUrl } from 'src/app/core/enums/app-url.enum';
 
@@ -10,8 +10,8 @@ import { AppUrl } from 'src/app/core/enums/app-url.enum';
 })
 export class LoginComponent {
   public loginForm = new FormGroup({
-    emailOrUsername: new FormControl(''),
-    password: new FormControl('')
+    emailOrUsername: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(25)])
   });
 
   constructor(private router: Router) {}

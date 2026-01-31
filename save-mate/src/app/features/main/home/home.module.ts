@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { HomeComponent } from './home.component';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -9,6 +10,7 @@ import { RouterModule } from '@angular/router';
     HomeComponent
   ],
   imports: [
+    SharedModule,
     RouterModule.forChild([
       { path: '', component: HomeComponent },
     ])

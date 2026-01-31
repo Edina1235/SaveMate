@@ -14,6 +14,7 @@ export class GoalsComponent {
   public goalsForm: FormGroup = new FormGroup({
     other: new FormControl(''),
     otherName: new FormControl(''),
+    amount: new FormControl('')
   });
 
   constructor(private questionsService: QuestionsService) {
@@ -22,11 +23,9 @@ export class GoalsComponent {
   }
 
   private fillFormGroup() {
-    let index = 0;
-    this.goals.forEach(goal => {
-      this.goalsForm.addControl('goal'+index, new FormControl(''));
-      index++;
-    });
+    for(let i = 0; i < this.goals.length; i++) {
+      this.goalsForm.addControl('goal'+i, new FormControl(''));
+    }
   }
 
   private setOtherValue() {
@@ -39,12 +38,31 @@ export class GoalsComponent {
   public isButtonActive() {
     let returnValue = false;
     Object.keys(this.goalsForm.controls).forEach(controlName => {
-      if(this.goalsForm.get(controlName)?.value) returnValue = true;
+      if(this.goalsForm.get(controlName)?.value 
+         && this.goalsForm.get('amount')?.value) 
+         returnValue = true;
     });
     return returnValue;
   }
 
+  private setGoalTarget() {
+    const amount = this.goalsForm.get('amount')?.value;
+    const targets = [];
+    for(let i = 0; i < this.goals.length; i++) {
+      if(this.goalsForm.get('goal'+i)?.value) {
+        targets.push(this.goals[i]);
+      }
+    }
+
+    if(this.goalsForm.get('other')?.value 
+       && this.goalsForm.get('otherName')?.value) {
+      targets.push(this.goalsForm.get('otherName')?.value);
+    }
+    this.questionsService.setGoalTarget(targets, amount);
+  }
+
   public onClickNext() {
+    this.setGoalTarget();
     this.questionsService.activeStep = QuestionSteps.GoalDeadline;
   }
 }

@@ -14,6 +14,7 @@ export class ExpensesComponent {
   constructor(private questionsService: QuestionsService) {}
 
   public onClickNext() {
+    this.questionsService.setTopSpendingCategories(this.activeCategories);
     this.questionsService.activeStep = QuestionSteps.PreviousMonthExpenses;
   }
 

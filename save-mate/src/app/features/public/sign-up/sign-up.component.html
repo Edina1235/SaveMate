@@ -11,32 +11,60 @@
                 <div class="form-group">
                     <label for="lastName">Vezetéknév</label>
                     <input id="lastName" type="text" formControlName="lastName">
+                    <small *ngIf="signUpForm.get('lastName')?.dirty &&
+                                  signUpForm.get('lastName')?.errors?.['required']">Kötelező mező</small>
                 </div>
                 <div class="form-group">
                     <label for="firstName">Keresztnév</label>
                     <input id="firstName" type="text" formControlName="firstName">
+                    <small *ngIf="signUpForm.get('firstName')?.dirty &&
+                                  signUpForm.get('firstName')?.errors?.['required']">Kötelező mező</small>
                 </div>
             </div>
             <div class="form-group"> 
-                <label for="nickName">Felhasználónév</label>
-                <input id="nickName" type="text" formControlName="nickName">
+                <label for="userName">Felhasználónév</label>
+                <input id="userName" type="text" formControlName="userName">
+                <small *ngIf="signUpForm.get('userName')?.dirty &&
+                              signUpForm.get('userName')?.errors?.['required']">Kötelező mező</small>
+                <small *ngIf="signUpForm.get('userName')?.dirty &&
+                              signUpForm.get('userName')?.errors?.['minlength']">Legalább 4 karakterből kell, hogy álljon!</small>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
                 <input id="email" type="text" formControlName="email">
+                <small *ngIf="signUpForm.get('email')?.dirty &&
+                              signUpForm.get('email')?.errors?.['required']">Kötelező mező</small>
+                <small *ngIf="signUpForm.get('email')?.dirty &&
+                              signUpForm.get('email')?.errors?.['email']">Nem email formátumú!</small>
             </div>
             <div class="form-group">
                 <label for="password">Jelszó</label>
                 <input id="password" type="password" formControlName="password">
+                <small *ngIf="signUpForm.get('password')?.dirty &&
+                              signUpForm.get('password')?.errors?.['required']">Kötelező mező</small>
+                <small *ngIf="signUpForm.get('password')?.dirty &&
+                              signUpForm.get('password')?.errors?.['minlength']">Legalább 6 karakterből kell, hogy álljon!</small>
+                <small *ngIf="signUpForm.get('password')?.dirty &&
+                              signUpForm.get('password')?.errors?.['maxlength']">Legfeljebb 25 karakterből állhat a jelszó!</small>
             </div>
             <div class="form-group">
                 <label for="confirmPassword">Jelszó megerősítése</label>
                 <input id="confirmPassword" type="password" formControlName="confirmPassword">
+                <small *ngIf="signUpForm.get('confirmPassword')?.dirty &&
+                              signUpForm.get('confirmPassword')?.errors?.['required']">Kötelező mező</small>
+                <small *ngIf="signUpForm.get('confirmPassword')?.dirty &&
+                              signUpForm.get('confirmPassword')?.errors?.['minlength']">Legalább 6 karakterből kell, hogy álljon!</small>
+                <small *ngIf="signUpForm.get('confirmPassword')?.dirty &&
+                              signUpForm.get('confirmPassword')?.errors?.['maxlength']">Legfeljebb 25 karakterből állhat a jelszó!</small>
+                <small *ngIf="signUpForm.get('confirmPassword')?.dirty &&
+                              signUpForm.get('confirmPassword')?.errors?.['matching']">Nem egyeznek meg a jelszavak</small>
             </div>
         </form>
         <div class="button-container">
-            <button (click)="onClickSignUp()">Regisztráció</button>
+            <button [disabled]="signUpForm.invalid"
+                    (click)="onClickSignUp()">Regisztráció</button>
         </div>
     </div>
     <p class="text">Már van fiókja? <span class="login" (click)="onClickLogin()">Jelentkezzen be</span></p>
 </div>
+<!-- TODO: mobil nézet -->

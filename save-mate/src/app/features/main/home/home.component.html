@@ -1,1 +1,107 @@
-<p>home works!</p>
+<div class="home-container">
+    <!-- Income -->
+    <div class="card income">
+        <div class="title">Bevétel</div>
+        <div class="content">
+            <div class="current">
+                <div class="amount">
+                    {{120000 | thousandSpace}} <span>Ft</span>
+                </div>
+            </div>
+            <div class="max">
+                <span class="label">Összes</span>
+                <div class="amount">
+                    {{240000 | thousandSpace}} <span>Ft</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Saving -->
+    <div class="card-with-plus saving">
+        <div class="header">
+            <div class="title">Megtakarítás</div>
+            <div class="plus">
+                <i class="fa-solid fa-plus"></i>
+            </div>
+        </div>
+        <div class="content">
+            <div class="current">
+                <span class="label">Jelenlegi</span>
+                <div class="amount">
+                    {{60000 | thousandSpace}} <span>Ft</span>
+                </div>
+            </div>
+            <div class="max">
+                <span class="label">Összes</span>
+                <div class="amount">
+                    {{120000 | thousandSpace}} <span>Ft</span>
+                </div>
+            </div>
+        </div>
+         <div class="background-icon">
+            <i class="fa-solid fa-piggy-bank"></i>
+         </div>
+    </div>
+    <!-- Expenses -->
+    <div class="card-with-plus expenses">
+        <div class="header">
+            <div class="title">Költések</div>
+            <div class="plus">
+                <i class="fa-solid fa-plus"></i>
+            </div>
+        </div>
+        <div class="content">
+            <div class="chart" #chart></div>
+        </div>
+    </div>
+    <!-- Recurring Expenses -->
+    <div class="card-with-plus recurring-expenses">
+        <div class="header">
+            <div class="title">Fix költések</div>
+            <div class="plus">
+                <i class="fa-solid fa-plus"></i>
+            </div>
+        </div>
+        <div class="content">
+            <div class="current">
+                <span class="label">Jelenlegi</span>
+                <div class="amount">
+                    {{60000 | thousandSpace}} <span>Ft</span>
+                </div>
+            </div>
+            <div class="max">
+                <span class="label">Összes</span>
+                <div class="amount">
+                    {{120000 | thousandSpace}} <span>Ft</span>
+                </div>
+            </div>
+        </div>
+         <div class="background-icon">
+            <i class="fa-solid fa-house"></i>
+         </div>
+    </div>
+    <!-- Categories to reduce -->
+    <div class="card categories-to-reduce">
+        <div class="title">Csökkenteni való kategóriák</div>
+        <div class="content">
+            <ng-container *ngFor="let categoryToReduce of categoriesToReduce">
+                <div class="column">
+                    <i [class]="categoryToReduce.category" [style.fontSize]="categoryToReduce.percent / 14 + 'rem'"></i>
+                    <span>{{categoryToReduce.percent}}%</span>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <!-- Debts -->
+    <div class="card-with-plus debts">
+        <div class="header">
+            <div class="title">Hitelek</div>
+            <div class="plus">
+                <i class="fa-solid fa-plus"></i>
+            </div>
+        </div>
+        <div class="content">
+            <div class="chart-debt" #chartDebt></div>
+        </div>
+    </div>
+</div>
