@@ -17,6 +17,7 @@ export class GoalDeadlineComponent {
   constructor(private questionsService: QuestionsService) {}
   
   public onClickNext() {
+    this.questionsService.setGoalDeadline(this.years);
     this.questionsService.activeStep = QuestionSteps.RecurringExpenses;
   }
 

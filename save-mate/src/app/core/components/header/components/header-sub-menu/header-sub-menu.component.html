@@ -13,6 +13,10 @@
     </div>
     <div class="navigation">
         <nav>
+            <button class="piggy-sense" (click)="onClickPiggySense()">
+                OkosMalac
+                <img class="piggy-sense-chat-icon" src="assets/images/piggy-sense-square-icon.png" alt="">
+            </button>
             <a [routerLink]="AppUrl.Profil" (click)="onClickProfil()">Profil</a>
             <a [routerLink]="AppUrl.Settings" (click)="onClickSettings()">Beállítások</a>
             <a [routerLink]="AppUrl.Notifications" (click)="onClickNotifications()">Értesítések<div class="notification-sign"></div></a>

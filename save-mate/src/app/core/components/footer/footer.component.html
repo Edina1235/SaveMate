@@ -1,0 +1,15 @@
+<div *ngIf="showFooter" class="footer-container">
+    <div class="navigation">
+        <nav>
+           <a [routerLink]="AppUrl.Home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                Főoldal
+            </a> 
+           <a [routerLink]="AppUrl.Statistics" routerLinkActive="active">
+                Statisztikák
+            </a> 
+           <a [routerLink]="AppUrl.KnowledgeBase" routerLinkActive="active">
+                Tudástár
+            </a> 
+        </nav>
+    </div>
+</div>

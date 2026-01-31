@@ -15,6 +15,7 @@ import { LoginComponent } from './features/public/login/login.component';
 import { SignUpComponent } from './features/public/sign-up/sign-up.component';
 import { SpendingCategoriesComponent } from './shared/components/spending-categories/spending-categories.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FooterComponent } from './core/components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HeaderSubMenuComponent,
     ChatComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

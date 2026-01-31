@@ -16,6 +16,7 @@ export class SavedAmountComponent {
   constructor(private questionsService: QuestionsService) {}
 
   public onClickNext() {
+    this.questionsService.setGoalSavedAmount(Number(this.savedAmount));
     this.questionsService.activeStep = QuestionSteps.Goals;
   }
 

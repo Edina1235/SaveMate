@@ -6,12 +6,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { ThousandSpacePipe } from './pipe/thousand-space.pipe';
 
 
 @NgModule({
   declarations: [
     SpendingCategoriesComponent,
-    DetailsComponent
+    DetailsComponent,
+    ThousandSpacePipe
   ],
   imports: [
     CommonModule,
@@ -28,7 +30,8 @@ import {MatInputModule} from '@angular/material/input';
     MatSelectModule,
     FormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    ThousandSpacePipe
   ]
 })
 export class SharedModule { }

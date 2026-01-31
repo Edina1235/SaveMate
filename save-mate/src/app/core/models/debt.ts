@@ -6,4 +6,6 @@ export interface Debt {
     monthlyPayment: number;
     interest: number;
     dueDate: Date;
+    hasArrears: boolean;
+    prepaymentAllowed: boolean;
 }

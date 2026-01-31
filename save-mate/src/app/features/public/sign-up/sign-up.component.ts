@@ -1,7 +1,29 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppUrl } from 'src/app/core/enums/app-url.enum';
+
+export function matchValidator(
+  matchTo: string, 
+  reverse?: boolean
+): ValidatorFn {
+  return (control: AbstractControl): 
+  ValidationErrors | null => {
+    if (control.parent && reverse) {
+      const c = (control.parent?.controls as any)[matchTo] as AbstractControl;
+      if (c) {
+        c.updateValueAndValidity();
+      }
+      return null;
+    }
+    return !!control.parent &&
+      !!control.parent.value &&
+      control.value === 
+      (control.parent?.controls as any)[matchTo].value
+      ? null
+      : { matching: true };
+  };
+}
 
 @Component({
   selector: 'app-sign-up',
@@ -10,18 +32,18 @@ import { AppUrl } from 'src/app/core/enums/app-url.enum';
 })
 export class SignUpComponent {
   public signUpForm = new FormGroup({
-    lastName: new FormControl(''),
-    firstName: new FormControl(''),
-    nickName: new FormControl(''),
-    email: new FormControl(''),
-    password: new FormControl(''),
-    confirmPassword: new FormControl('')
+    lastName: new FormControl('', [Validators.required]),
+    firstName: new FormControl('', [Validators.required]),
+    userName: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(25)]),
+    confirmPassword: new FormControl('', [Validators.required, matchValidator('password')])
   });
 
   constructor(private router: Router) {}
 
   public onClickSignUp() {
-    this.router.navigateByUrl(AppUrl.Home);
+    this.router.navigateByUrl(AppUrl.Questions);
   }
 
   public onClickLogin() {
@@ -36,8 +58,8 @@ export class SignUpComponent {
     return this.signUpForm.get('lastName')?.value;
   }
 
-  private get nickName() {
-    return this.signUpForm.get('nickName')?.value;
+  private get userName() {
+    return this.signUpForm.get('userName')?.value;
   }
 
   private get email() {

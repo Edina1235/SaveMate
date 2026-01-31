@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { AppUrl } from 'src/app/core/enums/app-url.enum';
 
 @Component({
@@ -10,7 +11,11 @@ import { AppUrl } from 'src/app/core/enums/app-url.enum';
 export class HeaderSubMenuComponent {
   public AppUrl = AppUrl;
 
-  constructor(public dialogRef: MatDialogRef<HeaderSubMenuComponent>) {}
+  constructor(private dialogRef: MatDialogRef<HeaderSubMenuComponent>,
+              private router: Router
+  ) {}
+
+  public onClickPiggySense() {}
 
   public onClickProfil() {
     this.closeDialog();
@@ -29,7 +34,7 @@ export class HeaderSubMenuComponent {
   }
 
   public onClickLogout() {
-    console.log("logout");
+    this.router.navigateByUrl(AppUrl.Login);
     this.closeDialog();
   }
 

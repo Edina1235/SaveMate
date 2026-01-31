@@ -11,18 +11,18 @@ import { filter } from 'rxjs';
 })
 export class PiggySenseChatComponent {
   public showChat = true;
-    public AppUrl = AppUrl;
-  
-    constructor(private router: Router,
-                private dialog: MatDialog
-    ) {
-      this.router.events
-        .pipe(
-          filter(event => event instanceof NavigationEnd)
-        )
-        .subscribe((event: any) => {
-          const hiddenRoutes = [AppUrl.Questions];
-          this.showChat = !hiddenRoutes.includes(event.urlAfterRedirects);
-        });
-    }
+  public AppUrl = AppUrl;
+
+  constructor(private router: Router,
+              private dialog: MatDialog
+  ) {
+    this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd)
+      )
+      .subscribe((event: any) => {
+        const hiddenRoutes = [AppUrl.Questions];
+        this.showChat = !hiddenRoutes.includes(event.urlAfterRedirects);
+      });
+  }
 }

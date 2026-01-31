@@ -16,6 +16,7 @@ export class IncomeComponent {
   constructor(private questionsService: QuestionsService) {}
   
   public onClickNext() {
+    this.questionsService.setIncome(Number(this.income));
     this.questionsService.activeStep = QuestionSteps.SavedAmount;
   }
 

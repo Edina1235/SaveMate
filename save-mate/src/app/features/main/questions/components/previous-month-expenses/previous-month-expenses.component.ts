@@ -4,6 +4,7 @@ import { QuestionSteps } from 'src/app/core/enums/question-steps.enum';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SpendingCategoriesName } from 'src/app/core/enums/spending-categories-name.enum';
 import { SpendingCategoriesIcon } from 'src/app/core/enums/spending-categories-icon.enum';
+import { ExpenseInput } from 'src/app/core/models/expense-input';
 
 @Component({
   selector: 'app-previous-month-expenses',
@@ -25,6 +26,7 @@ export class PreviousMonthExpensesComponent {
   }
   
   public onClickNext() {
+    this.questionsService.setExpenses(this.getExpenseInput());
     this.questionsService.activeStep = QuestionSteps.DebtQuestion;
   }
 
@@ -62,6 +64,17 @@ export class PreviousMonthExpensesComponent {
 
   public get csvFile() {
     return this.expensesGroup.get('csvFile')?.value;
+  }
+
+  private getExpenseInput() {
+    const expenseInput: ExpenseInput[] = [];
+    this.indexes.forEach(index => {
+      expenseInput.push({
+        amount: this.getCostByIndex(index),
+        category: this.getSpendingCategoryByIndex(index)
+      });
+    });
+    return expenseInput;
   }
 
   private setSpendingCategory(spendingCategory: SpendingCategoriesName, index: number) {

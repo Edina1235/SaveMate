@@ -10,13 +10,6 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./debt-delay.component.scss']
 })
 export class DebtDelayComponent implements OnInit {
-  public debts: Debt[] = [
-    {id: '1', userId: '1', name: 'haz', totalAmount: 100, monthlyPayment: 10, interest: 3, dueDate: new Date()},
-    {id: '1', userId: '1', name: 'haz', totalAmount: 100, monthlyPayment: 10, interest: 3, dueDate: new Date()},
-    {id: '1', userId: '1', name: 'haz', totalAmount: 100, monthlyPayment: 10, interest: 3, dueDate: new Date()},
-    {id: '1', userId: '1', name: 'haz', totalAmount: 100, monthlyPayment: 10, interest: 3, dueDate: new Date()},
-    {id: '1', userId: '1', name: 'haz', totalAmount: 100, monthlyPayment: 10, interest: 3, dueDate: new Date()}
-  ];
   public debtDelayGroup: FormGroup = new FormGroup({
     debtDelay: new FormControl('no')
   });
@@ -64,7 +57,19 @@ export class DebtDelayComponent implements OnInit {
     });
   }
 
+  private setCheckedDebts() {
+    for(let i = 0; i < this.debts.length; i++) {
+      if(this.debtDelayGroup.get('debt'+i)?.value)
+        this.debts[i].hasArrears = true;
+    }
+  }
+
   public onClickNext() {
+    this.setCheckedDebts();
     this.questionsService.activeStep = QuestionSteps.Prepayment;
+  }
+
+  public get debts() {
+    return this.questionsService.debts;
   }
 }

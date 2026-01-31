@@ -1,7 +1,8 @@
 <div class="recurring-expenses-container">
     <form [formGroup]="recurringExpensesGroup">
         <label class="question" for="recurring-expenses">Melyek a fix költségek?</label>
-        <app-spending-categories></app-spending-categories>
+        <app-spending-categories [activeCategories]="activeCategories"
+                                 (selectedCategories)="setActiveCategories($event)"></app-spending-categories>
         <div class="form-group">
             <label for="avg">Fix költségek átlagosan:</label>
             <div class="input-wrapper">

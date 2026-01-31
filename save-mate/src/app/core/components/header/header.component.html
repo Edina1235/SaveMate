@@ -1,10 +1,16 @@
 <div *ngIf="showHeader" class="header-container" #headerContainer>
-    <img class="icon" src="assets/images/icon/icon.png" alt="">
+    <img class="icon" src="assets/images/icon/icon.png" alt="" (click)="onClickIcon()">
     <div class="navigation">
         <nav>
-           <a [routerLink]="AppUrl.Home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Főoldal</a> 
-           <a [routerLink]="AppUrl.Statistics" routerLinkActive="active">Statisztikák</a> 
-           <a [routerLink]="AppUrl.KnowledgeBase" routerLinkActive="active">Tudástár</a> 
+           <a [routerLink]="AppUrl.Home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                Főoldal
+            </a> 
+           <a [routerLink]="AppUrl.Statistics" routerLinkActive="active">
+                Statisztikák
+            </a> 
+           <a [routerLink]="AppUrl.KnowledgeBase" routerLinkActive="active">
+                Tudástár
+            </a> 
         </nav>
     </div>
     <div class="sub-menu" (click)="onClickOpenSubMenu()">
@@ -12,6 +18,25 @@
             <div class="notification-icon">
                 <i class="fa-solid fa-bell"></i>
             </div>
+            <ng-container *ngIf="false else monogram">
+                <img src="" alt="">
+            </ng-container>
+            <ng-template #monogram>
+                <div class="monogram-container">
+                    <div class="last-name">T</div>
+                    <div class="first-name">E</div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showHeader" class="header mobile">
+    <img class="icon" src="assets/images/icon/icon.png" alt="" (click)="onClickIcon()">
+    <h1>Title</h1>
+    <div class="sub-menu" (click)="onClickOpenSubMenu()">
+        <div class="avatar-image">
+            <div class="notification-sign"></div>
             <ng-container *ngIf="false else monogram">
                 <img src="" alt="">
             </ng-container>

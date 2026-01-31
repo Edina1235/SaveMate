@@ -18,6 +18,7 @@ export class RecurringExpensesComponent {
   constructor(private questionsService: QuestionsService) {}
   
   public onClickNext() {
+    this.questionsService.setRecurringExpenses(this.activeCategories, this.avg);
     this.questionsService.activeStep = QuestionSteps.Expenses;
   }
 
@@ -26,6 +27,6 @@ export class RecurringExpensesComponent {
   }
 
   public setActiveCategories(categories: SpendingCategoriesName[]) {
-
+    this.activeCategories = categories;
   }
 }

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Debt } from 'src/app/core/models/debt';
 import { Router } from '@angular/router';
 import { AppUrl } from 'src/app/core/enums/app-url.enum';
 import { FormControl, FormGroup } from '@angular/forms';
+import { QuestionsService } from '../../questions.service';
 
 @Component({
   selector: 'app-prepayment',
@@ -10,30 +10,33 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./prepayment.component.scss']
 })
 export class PrepaymentComponent {
-  public debts: Debt[] = [
-    {id: '1', userId: '1', name: 'haz', totalAmount: 100, monthlyPayment: 10, interest: 3, dueDate: new Date()},
-    {id: '1', userId: '1', name: 'haz', totalAmount: 100, monthlyPayment: 10, interest: 3, dueDate: new Date()},
-    {id: '1', userId: '1', name: 'haz', totalAmount: 100, monthlyPayment: 10, interest: 3, dueDate: new Date()},
-    {id: '1', userId: '1', name: 'haz', totalAmount: 100, monthlyPayment: 10, interest: 3, dueDate: new Date()},
-    {id: '1', userId: '1', name: 'haz', totalAmount: 100, monthlyPayment: 10, interest: 3, dueDate: new Date()}
-  ];
-
   public debtsGroup: FormGroup = new FormGroup({});
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private questionService: QuestionsService) {
     this.fillFormGroup();
-    console.log(this.debtsGroup);
   }
 
   private fillFormGroup() {
-      let index = 0;
-      this.debts.forEach(debt => {
-        this.debtsGroup.addControl('debt'+index, new FormControl(false));
-        index++;
-      });
+    for(let i = 0; i < this.debts.length; i++) {
+      this.debtsGroup.addControl('debt'+i, new FormControl(false));
     }
+  }
+
+  private setCheckedPrepayments() {
+    for(let i = 0; i < this.debts.length; i++) {
+      if(this.debtsGroup.get('debt'+i)?.value) {
+        this.debts[i].prepaymentAllowed = true;
+      }
+    }
+  }
 
   public onClickFinish() {
+    this.setCheckedPrepayments();
     this.router.navigateByUrl(AppUrl.Home);
+  }
+
+  public get debts() {
+    return this.questionService.debts;
   }
 }

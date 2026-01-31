@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { QuestionsService } from '../../questions.service';
 import { QuestionSteps } from 'src/app/core/enums/question-steps.enum';
+import { DebtInput } from 'src/app/core/models/debt-input';
 
 @Component({
   selector: 'app-debts',
@@ -60,7 +61,26 @@ export class DebtsComponent implements OnInit {
     this.addNewRow();
   }
 
+  private getNonEmptyDebtInput() {
+    const debtInput: DebtInput[] = [];
+    this.indexes.forEach(index => {
+      const name = this.getNameByIndex(index);
+      const totalAmount = this.getAmountByIndex(index);
+      const monthlyPayment = this.getMonthlyAmountByIndex(index);
+      const interest = this.getInterestByIndex(index);
+      if(name && totalAmount && monthlyPayment && interest)
+        debtInput.push({
+          name: this.getNameByIndex(index),
+          totalAmount: this.getAmountByIndex(index),
+          monthlyPayment: this.getMonthlyAmountByIndex(index),
+          interest: this.getInterestByIndex(index)
+        });
+    });
+    return debtInput;
+  }
+
   public onClickNext() {
+    this.questionsService.setDebts(this.getNonEmptyDebtInput());
     this.questionsService.activeStep = QuestionSteps.DebtDelay;
   }
 }

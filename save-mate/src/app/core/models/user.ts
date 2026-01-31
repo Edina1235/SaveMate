@@ -10,4 +10,7 @@ export interface User {
     lastLoginDate: Date;
     globalNotificationsLastSeenAt: Date;
     isGlobalNotificationsEnabled: boolean;
+    topSpendingCategories: string[];
+    fixSpendingCategories: string[];
+    avgMonthlyFixedCosts: number;
 }

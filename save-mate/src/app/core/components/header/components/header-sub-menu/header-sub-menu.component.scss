@@ -48,6 +48,20 @@
                 background-color: #ffa500;
             }
         }
+
+        .piggy-sense {
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+
+            .piggy-sense-chat-icon {
+                height: 1.5rem;
+            }
+            
+            @media screen and (max-width: 660px) {
+                display: flex;
+            }
+        }
         
         a, button {
             font-family: inherit;

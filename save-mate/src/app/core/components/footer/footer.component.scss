@@ -1,0 +1,47 @@
+@import "src/styles/variables.scss";
+
+.footer-container {
+    display: none;
+    height: 30px;
+    background-color: $header-color;
+    border-radius: 10px 10px 0 0;
+
+    @media screen and (max-width: 660px) {
+        display: grid;
+    }
+
+    .navigation {
+        display: grid;
+        justify-content: center;
+
+        nav {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            text-align: center;
+            gap: 0.5rem;
+
+            a {
+                color: $white;
+                text-decoration: none;
+                font-size: 1rem;
+                display: grid;
+                align-items: center;
+                padding: 0.5rem;
+
+                &.active {
+                    background-color: $dark-green;
+                    scale: 1.1;
+                    border-radius: 5px 5px 0 0;
+
+                    &:hover {
+                        filter: brightness(0.95);
+                    }
+                }
+
+                &:not(.active):hover {
+                    background-color: rgba(0, 0, 0, 0.2);
+                }
+            }
+        }
+    }
+}
