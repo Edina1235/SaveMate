@@ -9,7 +9,6 @@
     app-monogram {
         margin: 0.5rem;
     }
-
     .header {
         height: 50px;
         display: grid;
@@ -17,7 +16,7 @@
         color: $white;
         background-color: $header-color;
         text-align: start;
-
+        
         .name {
             margin: auto 0;
         }

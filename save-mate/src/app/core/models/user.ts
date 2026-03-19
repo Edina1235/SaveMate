@@ -1,3 +1,4 @@
+
 import { SpendingCategoriesName } from "../enums/spending-categories-name.enum";
 
 export interface User {

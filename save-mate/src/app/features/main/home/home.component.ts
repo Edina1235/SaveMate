@@ -168,7 +168,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
       }
     }    
   }
-
   private setOption() {
     this.chartOptions = {
       tooltip: {
