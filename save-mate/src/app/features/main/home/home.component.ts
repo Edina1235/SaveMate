@@ -5,6 +5,11 @@ import * as echarts from 'echarts';
 import { CategoryToReduce } from 'src/app/core/models/category-to-reduce';
 import { SpendingCategoriesIcon } from 'src/app/core/enums/spending-categories-icon.enum';
 import { ThousandSpacePipe } from 'src/app/shared/pipe/thousand-space.pipe';
+import { MatDialog } from '@angular/material/dialog';
+import { AddDebtComponent } from './dialogs/add-debt/add-debt.component';
+import { AddingFixedSpendComponent } from './dialogs/adding-fixed-spend/adding-fixed-spend.component';
+import { AddingSavingComponent } from './dialogs/adding-saving/adding-saving.component';
+import { AddingSpendingComponent } from './dialogs/adding-spending/adding-spending.component';
 
 @Component({
   selector: 'app-home',
@@ -52,26 +57,54 @@ export class HomeComponent implements OnInit, AfterViewInit {
     {category: SpendingCategoriesIcon.HousingAndUtilities, percent: 20}
   ];
 
- /* @HostListener('window:resize')
+ @HostListener('window:resize')
   onResize() {
-    this.chartInstance?.resize();
-    this.chartInstanceDebt?.resize();
     if(window.innerWidth <= 660) {
-      this.chartInstance?.setOption({
+      this.chartInstance?.setOption({ 
         legend: {
-          top: '2rem',
-          right: 'center',
-          bottom: '0'
+          left: '50%',
+          formatter: (name: string) => {
+            const max = 20;
+            if (name.length > max) {
+              return name.slice(0, max) + '\n' + name.slice(max);
+            }
+            return name;
+          }
         },
         series: [{
-          
-          center: ['50%', '20%'],
+          label: {
+            fontSize: 12,
+          },
+          center: ['25%', '50%'],
+          radius: ['30%', '45%']
         }]
-      })
+      });
+      this.chartInstanceDebt?.setOption({
+      legend: {
+        right: '5%',
+      },
+      graphic: {
+        left: '20%',
+        style: {
+          width: 50,
+          height: 35
+        }
+      },
+      series: [
+        {
+          type: 'pie',
+          radius: ['40%', '60%'],
+          center: ['28%', '50%'],
+        }
+      ]
+    });
     } else {
-
+      this.initializeCharts();
     }
-  }*/
+    
+    this.chartInstance?.resize();
+    this.chartInstanceDebt?.resize();
+  }
 
   @ViewChild('chart', { static: false }) chartElement?: ElementRef;
   @ViewChild('chartDebt', { static: false }) chartElementDebt?: ElementRef;
@@ -90,21 +123,51 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log(this.chartElement, this.chartElementDebt);
     if(this.chartElement && this.chartElementDebt) {
       this.chartInstance = echarts.init(this.chartElement.nativeElement);
       this.chartInstanceDebt = echarts.init(this.chartElementDebt.nativeElement);
+      this.initializeCharts();
+    }
+    this.onResize();
+  }
+
+  constructor(private thousandPipe: ThousandSpacePipe,
+              private dialog: MatDialog) {}
+
+  public onClickOpenDebtDialog() {
+    this.dialog.open(AddDebtComponent, {
+      autoFocus: false
+    });
+  }
+
+  public onClickOpenFixedSpendDialog() {
+    this.dialog.open(AddingFixedSpendComponent, {
+      autoFocus: false
+    });
+  }
+
+  public onClickOpenAddingSavingDialog() {
+    this.dialog.open(AddingSavingComponent, {
+      autoFocus: false
+    });
+  }
+
+  public onClickOpenAddingSpendingDialog() {
+    this.dialog.open(AddingSpendingComponent, {
+      autoFocus: false
+    });
+  }
+
+  private initializeCharts() { 
+    if(this.chartInstance && this.chartInstanceDebt) {
       this.setOption();
       this.setOptionDebt();
       if(this.chartOptions && this.chartOptionsDebt) {
         this.chartInstance.setOption(this.chartOptions);
         this.chartInstanceDebt.setOption(this.chartOptionsDebt);
       }
-    }
-    console.log(this.chartOptions, this.chartOptionsDebt);
+    }    
   }
-
-  constructor(private thousandPipe: ThousandSpacePipe) {}
 
   private setOption() {
     this.chartOptions = {

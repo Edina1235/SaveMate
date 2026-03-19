@@ -3,7 +3,7 @@
 .home-container {
     display: grid; 
     max-height: 100%;
-    width: clamp(340px, 60vw, 1000px);
+    width: clamp(340px, 90vw, 1000px);
     grid-template-columns: 1fr 1fr;
     margin: 0.5rem auto;
     gap: 0.5rem;
@@ -11,8 +11,21 @@
     @media screen and (max-width: 660px) {
         grid-template-columns: 1fr;
 
+        .chart-wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            min-height: 0;
+
+            .chart {
+                flex: 1 1 auto;
+                min-height: 250px;
+            }
+        }
+
         .card, .card-with-plus {
             min-height: 6rem !important;
+            max-width: calc(100vw - 1rem);
         } 
 
         .amount {
@@ -25,8 +38,9 @@
             }
         }
     }
-
-    .chart, .chart-debt {
+    
+    .chart {
+        min-height: 0;
         height: 100%;
         width: 100%;
     }

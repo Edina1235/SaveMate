@@ -1,0 +1,8 @@
+<div class="spending-categories-container">
+    <form>
+        <ng-container *ngFor="let icon of spendingCategoryIcons">
+            <input type="checkbox">
+            <i [class]="icon"></i>
+        </ng-container>
+    </form>
+</div>

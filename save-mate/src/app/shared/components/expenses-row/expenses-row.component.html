@@ -1,0 +1,36 @@
+<form [formGroup]="expensesGroup">
+    <div class="form-group">
+        <label for="upload-file">csv feltöltése</label>
+        <input id="upload-file" type="file" accept=".csv" formControlName="csvFile" hidden #fileInput (change)="onFileSelected($event)"/>
+        <div class="add-file-button" (click)="fileInput.click()">
+            <i class="fa-solid fa-paperclip"></i>
+        </div>
+        <span *ngIf="fileName">{{ fileName }}</span>
+    </div>
+    <div class="form-group">
+        <label for="expense-data">kézi feltöltés</label>
+        <div class="row" *ngFor="let index of indexes">
+            <mat-form-field>
+                <mat-select [formControlName]="'spendingCategory_'+index">
+                    <mat-select-trigger>
+                        <i [class]="categoryIcons[findIndex(index)]"></i>
+                    </mat-select-trigger>
+                    <mat-option *ngFor="let category of categories; let i = index" [value]="category">
+                        <i [class]="categoryIcons[i]"></i>
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div class="input-wrapper">
+                <input id="expense-data" type="number" [formControlName]="'cost_'+index">
+                <span class="suffix">Ft</span>
+            </div>
+            <div class="delete">
+                <i class="fa-solid fa-trash-can" (click)="onClickDelete(index)"></i>
+            </div>
+        </div>
+    </div>
+    <button class="new-row-button"
+            (click)="onClickNewRow()">
+            <i class="fa-solid fa-plus"></i>
+    </button>
+</form>

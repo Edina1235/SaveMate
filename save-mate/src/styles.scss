@@ -15,14 +15,13 @@ body {
         }
     }
 
-    .next-button {
+    .previous-button, .next-button {
         padding: 0.5rem 1rem;
         border: none;
         border-radius: 5px;
         background-color: $dark-green;
         color: $white;
         font-weight: 600;
-        margin-left: auto;
         margin-bottom: 0.5rem;
         margin-right: 0.5rem;
         margin-top: 0.5rem;
@@ -169,6 +168,31 @@ i {
     }
 }
 
+.contact-container .mdc-text-field--no-label:not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mat-mdc-form-field-infix {
+    padding-bottom: 0 !important;
+}
+
+.mat-mdc-option.mat-mdc-option-active, .mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple):not(.mdc-list-item--disabled) {
+    background: rgba($dark-green, 0.2) !important;
+}
+
+.mat-primary .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+    color: $dark-green !important;
+}
+
+.mdc-list-item__primary-text {
+    color: $green !important;
+
+    p {
+        margin: 0;
+    }
+}
+
+.mat-mdc-select-placeholder {
+    color: $dark-green !important;
+    font-size: 0.85rem !important;
+}
+
 .custom-dialog-panel {
   position: absolute !important; 
   top: calc(50px + 0.5rem);
@@ -210,6 +234,22 @@ i {
 
 .card {
 
+    .header {
+        display: flex;
+        justify-content: space-between;
+
+        i {
+            font-size: 1.2rem;
+            color: $dark-green;
+            font-weight: bold;
+
+            &:hover {
+                opacity: 0.8;
+                cursor: pointer;
+            }
+        }
+    }
+
     .title {
         font-size: 1.2rem;
         color: $dark-green;
@@ -240,9 +280,15 @@ i {
             background-color: $dark-green;
             height: 2rem;
             width: 2rem;
+            z-index: 10;
 
             i {
                 color: white;
+            }
+
+            &:hover {
+                filter: brightness(1.2);
+                cursor: pointer;
             }
         }
 

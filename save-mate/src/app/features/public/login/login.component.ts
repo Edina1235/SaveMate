@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppUrl } from 'src/app/core/enums/app-url.enum';
@@ -14,10 +15,18 @@ export class LoginComponent {
     password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(25)])
   });
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+              private afAuth: AngularFireAuth
+  ) {}
 
   public onClickLogin() {
+    this.login(this.emailOrUsername, this.password).then(valami => {
+      console.log(valami);
+    });
     this.router.navigateByUrl(AppUrl.Home);
+  }
+  private login(email: string, password: string) {
+    return this.afAuth.signInWithEmailAndPassword(email, password);
   }
 
   public onClickSignUp() {
@@ -25,10 +34,10 @@ export class LoginComponent {
   }
 
   private get emailOrUsername() {
-    return this.loginForm.get('emailOrUsername')?.value;
+    return this.loginForm.get('emailOrUsername')?.value ?? '';
   }
 
   private get password() {
-    return this.loginForm.get('password')?.value;
+    return this.loginForm.get('password')?.value ?? '';
   }
 }

@@ -1,0 +1,192 @@
+@import "src/styles/variables.scss";
+
+.settings-container {
+    color: white;
+    margin: 0.5rem;
+    overflow: auto;
+
+    .wrapper {
+        margin-bottom: 0.5rem;
+    }
+
+    .divider {
+        height: 1px;
+        width: 100%;
+        opacity: 0.5;
+        margin: 0.25rem 0 0.5rem;
+        background-color: white;
+    }
+
+    .content {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    .avatar-container {
+        display: flex;
+        justify-content: center;
+        background-color: white;
+
+        .avatar {
+            max-height: 100%;
+            border-radius: 50%;
+        }
+    }
+
+    .avatar-container, app-monogram {
+        border-radius: 50%;
+        height: 5rem;
+        width: 5rem;
+        border: 5px solid transparent;
+
+        &.active {
+            border: 5px solid $active-color;;
+        }
+
+        &:not(.active) {
+            filter: brightness(0.9);
+        }
+
+        &:hover {
+            filter: brightness(1);
+            cursor: pointer;
+        }
+
+        @media screen and (max-width: 660px) { 
+            height: 2.5rem;
+            width: 2.5rem;
+        }
+    }
+
+    .monogram-mobile {
+        display: none;
+
+        @media screen and (max-width: 660px) { 
+            display: block;
+        }
+    }
+
+    .monogram-desktop {
+        display: block;
+
+        @media screen and (max-width: 660px) { 
+            display: none;
+        }
+    }
+
+    form {
+        display: grid;
+        gap: 1rem;
+        width: 100%; 
+        justify-content: center;
+        text-align: start;
+
+        &.user {
+            grid-template-columns: repeat(4, 200px);
+            margin: auto;
+        }
+
+        &.saving-payment {
+            grid-template-columns: repeat(2, 200px);
+            margin: auto;
+        }
+
+        &.payment {
+            grid-template-columns: repeat(3, 200px);
+            margin: auto;
+        }
+
+        @media screen and (max-width: 400px) {
+            gap: 0;
+        }
+
+        .rows { 
+            overflow: auto;
+            scrollbar-width: none;
+
+            &::-webkit-scrollbar {
+                width: 0;
+            }
+        }
+
+        h1 {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+        
+        .input-wrapper {
+            position: relative;
+
+            .suffix {
+                position: absolute;
+                bottom: 0.25rem;
+                right: 0.5rem;
+                opacity: 0.8;
+                font-size: 0.9rem;
+            }
+        }
+
+        .form-group {
+            display: grid;
+            gap: 0.25rem;
+            position: relative;
+            margin-bottom: 1rem;
+
+            input {
+                color: $white;
+            }
+        }
+
+        label {
+            margin-top: 0.5rem;
+        }
+
+        small {
+            color: $validate-error;
+            position: absolute;
+            bottom: -1.2rem;
+        }
+
+        input {
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid $white;
+        }
+    }
+
+    .button-wrapper {
+        display: grid;
+        width: 100%;
+    }
+
+    .save-button {
+        width: 250px;
+        padding: 0.5rem;
+        background-color: $dark-green;
+        color: white;
+        margin: auto;
+        border: none;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 1rem;
+    }
+}
+
+:host {
+    overflow: auto;
+    scrollbar-width: 0;
+
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+}
+
+::ng-deep .mat-mdc-slide-toggle .mdc-switch.mdc-switch--selected:enabled .mdc-switch__handle::after {
+    background: $dark-green !important;
+}
+
+::ng-deep .mat-mdc-slide-toggle .mdc-switch:enabled .mdc-switch__track::after {
+    background: white !important;
+}

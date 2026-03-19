@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppUrl } from 'src/app/core/enums/app-url.enum';
+import { Role, User } from 'src/app/core/models/user';
+import { UserService } from 'src/app/core/services/user.service';
 
 export function matchValidator(
   matchTo: string, 
@@ -40,10 +43,37 @@ export class SignUpComponent {
     confirmPassword: new FormControl('', [Validators.required, matchValidator('password')])
   });
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+              private afAuth: AngularFireAuth,
+              private userService: UserService
+  ) {}
 
   public onClickSignUp() {
+    this.signup(this.email, this.password).then(valami => {
+      const user: User = {
+        id: valami.user?.uid ?? "",
+        email: this.email,
+        firstname: this.firstName,
+        lastname: this.lastName,
+        nickname: this.userName,
+        passwordHash: this.password,
+        registrationDate: new Date(),
+        lastLoginDate: new Date(),
+        isGlobalNotificationsEnabled: true,
+        topSpendingCategories: [],
+        fixSpendingCategories: [],
+        avgMonthlyFixedCosts: 0,
+        role: Role.User,
+        avatarId: null
+      }
+      console.log(user);
+      this.userService.setUser(user).subscribe(user => console.log(user));
+    });
     this.router.navigateByUrl(AppUrl.Questions);
+  }
+
+  public signup(email: string, password: string) {
+    return this.afAuth.createUserWithEmailAndPassword(email, password);
   }
 
   public onClickLogin() {
@@ -51,26 +81,26 @@ export class SignUpComponent {
   }
 
   private get firstName() {
-    return this.signUpForm.get('firstName')?.value;
+    return this.signUpForm.get('firstName')?.value ?? '';
   }
 
   private get lastName() {
-    return this.signUpForm.get('lastName')?.value;
+    return this.signUpForm.get('lastName')?.value ?? '';
   }
 
   private get userName() {
-    return this.signUpForm.get('userName')?.value;
+    return this.signUpForm.get('userName')?.value ?? '';
   }
 
   private get email() {
-    return this.signUpForm.get('email')?.value;
+    return this.signUpForm.get('email')?.value ?? '';
   }
 
   private get password() {
-    return this.signUpForm.get('password')?.value;
+    return this.signUpForm.get('password')?.value ?? '';
   }
 
   private get confirmPassword() {
-    return this.signUpForm.get('confirmPassword')?.value;
+    return this.signUpForm.get('confirmPassword')?.value ?? '';
   }
 }

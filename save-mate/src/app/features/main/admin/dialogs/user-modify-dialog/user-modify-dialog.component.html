@@ -1,0 +1,19 @@
+<div class="card">
+    <div class="header">
+        <div class="title">Felhasználó módosítása</div>
+        <i class="fa-solid fa-xmark" (click)="onClickClose()"></i>
+    </div>
+    <div class="content">
+        <form [formGroup]="formGroup">
+            <ng-container *ngFor="let role of roles">
+                <div class="group">
+                    <input [id]="role" type="radio" formControlName="role" [value]="role">
+                    <label [for]="role">{{role}}</label>
+                </div>
+            </ng-container>
+        </form>
+        <div class="button-container">
+            <button (click)="onClickSave()">Mentés</button>
+        </div>
+    </div>
+</div>

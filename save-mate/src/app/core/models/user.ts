@@ -1,3 +1,5 @@
+import { SpendingCategoriesName } from "../enums/spending-categories-name.enum";
+
 export interface User {
     id: string;
     email: string;
@@ -8,9 +10,14 @@ export interface User {
     avatarId: string | null;
     registrationDate: Date;
     lastLoginDate: Date;
-    globalNotificationsLastSeenAt: Date;
     isGlobalNotificationsEnabled: boolean;
-    topSpendingCategories: string[];
-    fixSpendingCategories: string[];
+    topSpendingCategories: SpendingCategoriesName[];
+    fixSpendingCategories: SpendingCategoriesName[];
     avgMonthlyFixedCosts: number;
+    role: Role;
+}
+
+export enum Role {
+    Admin = "Admin",
+    User = "Felhasználó"
 }

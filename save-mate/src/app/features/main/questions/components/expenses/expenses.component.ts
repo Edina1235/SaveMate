@@ -18,6 +18,10 @@ export class ExpensesComponent {
     this.questionsService.activeStep = QuestionSteps.PreviousMonthExpenses;
   }
 
+  public onClickPrevious() {
+    this.questionsService.activeStep = QuestionSteps.RecurringExpenses;
+  }
+
   public setActiveCategories(categories: SpendingCategoriesName[]) {
     this.activeCategories = categories;
   }

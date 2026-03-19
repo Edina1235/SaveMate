@@ -6,6 +6,10 @@
     background-color: $light-green;
     width: 200px;
 
+    app-monogram {
+        margin: 0.5rem;
+    }
+
     .header {
         height: 50px;
         display: grid;
@@ -13,20 +17,6 @@
         color: $white;
         background-color: $header-color;
         text-align: start;
-
-        .monogram-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 500;
-            aspect-ratio: 1/1;
-            gap: 0.125rem;
-            color: $white;
-            background-color: $dark-green;
-            border-radius: 50%;
-            margin: 0.5rem;
-            max-height: 100%;
-        }
 
         .name {
             margin: auto 0;

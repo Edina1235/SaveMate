@@ -1,0 +1,88 @@
+@import "src/styles/variables.scss";
+
+.contact-container {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    p {
+        margin: 0;
+        color: $dark-green;
+        font-size: 1rem;
+    }
+
+    .card {
+        width: clamp(340px, 90vw, 500px);
+        aspect-ratio: 1/0.75;
+    }
+
+    .title {
+        margin-bottom: 1rem;
+    }
+
+    .content {
+        display: grid;
+        grid-template-rows: 1fr auto;
+        gap: 1rem;
+
+        .button-wrapper {
+            display: grid;
+            justify-content: center;
+            width: 100%;
+
+            button {
+                background-color: $dark-green;
+                padding: 0.5rem 1rem;
+                border: none;
+                border-radius: 10px;
+                color: white;
+                font-weight: 600;
+                width: 150px;
+
+                &:disabled {
+                    opacity: 0.6;
+                }
+
+                &:hover {
+                    cursor: pointer;
+                    filter: brightness(110%);
+                }
+            }
+        }
+    }
+
+    form {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: 1rem;
+
+        textarea {
+            width: calc(100% - 1rem);
+            border: 1px solid $dark-green;
+            border-radius: 10px;
+            padding: 0.5rem;
+
+            &:focus-visible {
+                outline: none;
+            }
+        }
+
+        input {
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid $dark-green;
+            
+            &:focus-visible {
+                outline: none;
+            }
+        }
+
+        .form-group {
+            display: grid;
+            grid-template-rows: auto 1fr;
+            gap: 0.5rem;
+            color: $dark-green;
+        }
+    }
+}

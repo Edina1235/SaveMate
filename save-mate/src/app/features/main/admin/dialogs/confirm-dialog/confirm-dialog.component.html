@@ -1,0 +1,13 @@
+<div class="card">
+    <div class="header">
+        <div class="title">Megerősítés</div>
+        <i class="fa-solid fa-xmark" (click)="onClickClose()"></i>
+    </div>
+    <div class="content">
+        <p>{{data}}</p>
+        <div class="button-container">
+            <button class="delete" (click)="onClickDelete()">Törlés</button>
+            <button class="cancel" (click)="onClickCancel()">Mégse</button>
+        </div>
+    </div>
+</div>

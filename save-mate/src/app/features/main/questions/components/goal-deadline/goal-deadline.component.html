@@ -16,7 +16,11 @@
             <span class="suffix">Év</span>
         </div>
     </form>
-    <button class="next-button"
-            [disabled]="years === ''"
-            (click)="onClickNext()">Következő</button>
+    <div class="button-container">
+        <button class="previous-button"
+            (click)="onClickPrevious()">Előző</button>
+        <button class="next-button"
+                [disabled]="years === ''"
+                (click)="onClickNext()">Következő</button>
+    </div>
 </div>

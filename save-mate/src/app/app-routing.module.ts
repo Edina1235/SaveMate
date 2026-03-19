@@ -12,10 +12,13 @@ import { LoginComponent } from './features/public/login/login.component';
 import { SignUpComponent } from './features/public/sign-up/sign-up.component';
 import { MainComponent } from './features/main/main.component';
 import { QuestionsModule } from 'src/app/features/main/questions/questions.module';
+import { AdminModule } from 'src/app/features/main/admin/admin.module';
+import { AdminGuard } from './core/guards/admin.guard';
 
 const routes: Routes = [
   {path: '', component: MainComponent, canActivate: [AuthGuard], children: [
     {path: '', loadChildren: () => import('src/app/features/main/home/home.module').then(m => HomeModule)},
+    {path: 'admin', loadChildren: () => import('src/app/features/main/admin/admin.module').then(m => AdminModule), canActivate: [AdminGuard]},
     {path: 'contact', loadChildren: () => import('src/app/features/main/contact/contact.module').then(m => ContactModule)},
     {path: 'knowledge-base', loadChildren: () => import('src/app/features/main/knowledge-base/knowledge-base.module').then(m => KnowledgeBaseModule)},
     {path: 'notifications', loadChildren: () => import('src/app/features/main/notifications/notifications.module').then(m => NotificationsModule)},

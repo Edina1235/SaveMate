@@ -1,0 +1,83 @@
+@import "src/styles/variables.scss";
+
+.card {
+    width: clamp(340px, 25vw, 600px);
+}
+
+.header {
+    gap: 2rem;
+}
+
+p {
+    margin: 0;
+}
+
+.group input[type='radio'] {
+    height: 0.75rem;
+    width: 0.75rem;
+    border-radius: 50%;
+    border: 1px solid $dark-green;
+    accent-color: $dark-green;
+    appearance: none;
+    -webkit-appearance: none;
+
+    &:checked {
+        border: 1px solid $dark-green;
+        background-color: $dark-green;
+    }
+}
+
+.row {
+    display: flex;
+    gap: 1rem;
+    margin: auto;
+
+    .group {
+        display: flex;
+        gap: 0.25rem;
+    }
+}
+
+textarea:focus-visible {
+    outline: none;
+}
+
+.form-group {
+    display: grid;
+    margin-top: 2rem;
+    gap: 1rem;
+    color: $dark-green;
+
+    input {
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid $dark-green;
+        width: 100%;
+
+        &:focus-visible {
+            outline: none;
+        }
+    }
+}
+
+.button-container {
+    display: grid;
+    margin-top: 1rem;
+    width: 100%;
+
+    button {
+        width: 50%;
+        margin: auto;
+        border: none;
+        border-radius: 10px;
+        background-color: $dark-green;
+        color: white;
+        padding: 0.5rem 1rem;
+        font-weight: 500;
+
+        &:hover {
+            filter: brightness(1.2);
+            cursor: pointer;
+        }
+    }
+}

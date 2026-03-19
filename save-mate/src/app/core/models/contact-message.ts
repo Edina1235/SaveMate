@@ -5,3 +5,11 @@ export interface ContactMessage {
     message: string;
     date: Date;
 }
+
+export interface ContactMessageToAdmin {
+    id: string;
+    email: string;
+    category: string;
+    message: string;
+    date: Date;
+}

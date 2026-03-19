@@ -5,39 +5,40 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PublicComponent } from './features/public/public.component';
 import { MainComponent } from './features/main/main.component';
-import { HeaderComponent } from './core/components/header/header.component';
-import { PiggySenseChatComponent } from './core/components/piggy-sense-chat/piggy-sense-chat.component';
-import { HeaderSubMenuComponent } from './core/components/header/components/header-sub-menu/header-sub-menu.component';
-import { ChatComponent } from './core/components/piggy-sense-chat/components/chat/chat.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './features/public/login/login.component';
 import { SignUpComponent } from './features/public/sign-up/sign-up.component';
-import { SpendingCategoriesComponent } from './shared/components/spending-categories/spending-categories.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FooterComponent } from './core/components/footer/footer.component';
+import { CoreModule } from './core/core.module';
+
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+
+import { environment } from './../../environment';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './core/auth.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     PublicComponent,
     MainComponent,
-    HeaderComponent,
-    PiggySenseChatComponent,
-    HeaderSubMenuComponent,
-    ChatComponent,
     LoginComponent,
-    SignUpComponent,
-    FooterComponent
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CoreModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -20,7 +20,7 @@
     <div class="card-with-plus saving">
         <div class="header">
             <div class="title">Megtakarítás</div>
-            <div class="plus">
+            <div class="plus" (click)="onClickOpenAddingSavingDialog()">
                 <i class="fa-solid fa-plus"></i>
             </div>
         </div>
@@ -46,11 +46,11 @@
     <div class="card-with-plus expenses">
         <div class="header">
             <div class="title">Költések</div>
-            <div class="plus">
+            <div class="plus" (click)="onClickOpenAddingSpendingDialog()">
                 <i class="fa-solid fa-plus"></i>
             </div>
         </div>
-        <div class="content">
+        <div class="content chart-wrapper">
             <div class="chart" #chart></div>
         </div>
     </div>
@@ -58,7 +58,7 @@
     <div class="card-with-plus recurring-expenses">
         <div class="header">
             <div class="title">Fix költések</div>
-            <div class="plus">
+            <div class="plus" (click)="onClickOpenFixedSpendDialog()">
                 <i class="fa-solid fa-plus"></i>
             </div>
         </div>
@@ -96,12 +96,12 @@
     <div class="card-with-plus debts">
         <div class="header">
             <div class="title">Hitelek</div>
-            <div class="plus">
+            <div class="plus" (click)="onClickOpenDebtDialog()">
                 <i class="fa-solid fa-plus"></i>
             </div>
         </div>
-        <div class="content">
-            <div class="chart-debt" #chartDebt></div>
+        <div class="content chart-wrapper">
+            <div class="chart" #chartDebt></div>
         </div>
     </div>
 </div>

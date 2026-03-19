@@ -1,1 +1,58 @@
-<p>notifications works!</p>
+<div class="notification-container">
+    <ng-container *ngIf="notifications.length === 0 else withNotification">
+        <div class="without-notification">
+            <div class="icon-container">
+                <div class="line"></div>
+                <i class="fa-solid fa-bell"></i>
+            </div>
+            <h1>Még nincs értesítése!</h1>
+        </div>
+    </ng-container>
+    <ng-template #withNotification>
+        <div class="with-notification" [class]="screen">
+            <div *ngIf="screen === 'mobile' && activeCategory"
+                class="back-arrow">
+                <i class="fa-solid fa-arrow-left"
+                    (click)="onClickBack()"></i>
+            </div>
+            <div *ngIf="(screen === 'mobile' && !activeCategory) || screen === 'desktop'" 
+                class="title-container">
+                <h1 class="title">Kategóriák</h1>
+                <div class="content">
+                    <ng-container *ngFor="let category of categories">
+                        <h2 class="message-title" 
+                            [class.active]="category === activeCategory"
+                            (click)="onClickCategory(category)">{{category}}</h2>
+                    </ng-container>
+                </div>
+            </div>
+            <div *ngIf="(screen === 'mobile' && activeCategory) || screen === 'desktop'" class="message-container">
+                <ng-container *ngFor="let notification of notifications">
+                    <div *ngIf="activeCategory === NotificationCategory.All || activeCategory === notification.category" 
+                        class="message">
+                        <div class="content">
+                            <h3 class="title">{{notification.title}}</h3>
+                            <p class="text">{{notification.text}}</p>
+                            <small class="footer">
+                                <span class="date">{{notification.createdAt | date: 'yyyy.MM.dd.'}}</span>
+                            </small>
+                        </div>
+                        <div class="button-container">
+                            <div class="read-status">
+                                <ng-container *ngIf="notification.isRead else notRead">
+                                    <i class="fa-solid fa-eye" (click)="onClickReadStatus(notification.id)"></i>
+                                </ng-container>
+                                <ng-template #notRead>
+                                    <i class="fa-solid fa-eye-slash" (click)="onClickReadStatus(notification.id)"></i>
+                                </ng-template>
+                            </div> 
+                            <div class="delete">
+                                <i class="fa-solid fa-trash-can" (click)="onClickDelete(notification.id)"></i>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </ng-template>
+</div>

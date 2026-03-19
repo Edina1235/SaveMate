@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AppUrl } from 'src/app/core/enums/app-url.enum';
 import { FormControl, FormGroup } from '@angular/forms';
 import { QuestionsService } from '../../questions.service';
+import { QuestionSteps } from 'src/app/core/enums/question-steps.enum';
 
 @Component({
   selector: 'app-prepayment',
@@ -34,6 +35,10 @@ export class PrepaymentComponent {
   public onClickFinish() {
     this.setCheckedPrepayments();
     this.router.navigateByUrl(AppUrl.Home);
+  }
+
+  public onClickPrevious() {
+    this.questionService.activeStep = QuestionSteps.DebtDelay;
   }
 
   public get debts() {

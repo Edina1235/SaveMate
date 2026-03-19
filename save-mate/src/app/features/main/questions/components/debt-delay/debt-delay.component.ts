@@ -69,6 +69,10 @@ export class DebtDelayComponent implements OnInit {
     this.questionsService.activeStep = QuestionSteps.Prepayment;
   }
 
+  public onClickPrevious() {
+    this.questionsService.activeStep = QuestionSteps.Debts;
+  }
+
   public get debts() {
     return this.questionsService.debts;
   }

@@ -1,1 +1,29 @@
-<p>contact works!</p>
+<div class="contact-container">
+    <div class="card">
+        <div class="title">Üzenet az adminnak</div>
+        <div class="content">
+            <form [formGroup]="formGroup">
+                <div class="form-group">
+                    <label for="">Kategória</label>
+                    <mat-form-field>
+                        <mat-select placeholder="Válasszon egy kategóriát" formControlName="category">
+                            <mat-select-trigger>
+                                <p>{{selectedCategory ?? '-'}}</p>
+                            </mat-select-trigger>
+                            <mat-option *ngFor="let category of contactCategories; let i = index" [value]="category">
+                                <p (click)="onClickCategory(category)">{{category}}</p>
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <label for="">Üzenet</label>
+                    <textarea type="text" placeholder="Írjon egy üzenetet" formControlName="message"></textarea>
+                </div>
+            </form>
+            <div class="button-wrapper">
+                <button [disabled]="formGroup.invalid" (click)="onClickSend()">Küld</button>
+            </div>
+        </div>
+    </div>
+</div>

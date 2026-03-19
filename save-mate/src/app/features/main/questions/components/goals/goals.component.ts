@@ -65,4 +65,8 @@ export class GoalsComponent {
     this.setGoalTarget();
     this.questionsService.activeStep = QuestionSteps.GoalDeadline;
   }
+
+  public onClickPrevious() {
+    this.questionsService.activeStep = QuestionSteps.SavedAmount;
+  }
 }

@@ -1,0 +1,68 @@
+<div class="card">
+    <div class="header">
+        <div class="title">Felhasználó részletei</div>
+        <i class="fa-solid fa-xmark" (click)="onClickClose()"></i>
+    </div>
+    <div class="content">
+        <div class="row">
+            <div class="label">Id</div>
+            <div class="value">{{user.id}}</div>
+        </div>
+        <div class="row">
+            <div class="label">Email</div>
+            <div class="value">{{user.email}}</div>
+        </div>
+        <div class="row">
+            <div class="label">Keresztnév</div>
+            <div class="value">{{user.firstname}}</div>
+        </div>
+        <div class="row">
+            <div class="label">Vezetéknév</div>
+            <div class="value">{{user.lastname}}</div>
+        </div>
+        <div class="row">
+            <div class="label">Becenév</div>
+            <div class="value">{{user.nickname}}</div>
+        </div>
+        <div class="row">
+            <div class="label">Avatar Id</div>
+            <div class="value">{{user.avatarId}}</div>
+        </div>
+        <div class="row">
+            <div class="label">Regisztráció dátuma</div>
+            <div class="value">{{user.registrationDate | date: 'yyyy-MM-dd'}}</div>
+        </div>
+        <div class="row">
+            <div class="label">Utolsó bejelentkezés dátuma</div>
+            <div class="value">{{user.lastLoginDate | date: 'yyyy-MM-dd'}}</div>
+        </div>
+        <div class="row">
+            <div class="label">Értesítések</div>
+            <div class="value">{{user.isGlobalNotificationsEnabled ? "Be" : "Ki"}}</div>
+        </div>
+        <div class="row">
+            <div class="label">Legnagyobb költségű kategóriák</div>
+            <div class="value-container">
+                <ng-container *ngFor="let category of user.topSpendingCategories">
+                    <div class="value">{{category}}</div>
+                </ng-container>
+            </div>
+        </div>
+        <div class="row">
+            <div class="label">Fix költségű kategóriák</div>
+            <div class="value-container">
+                <ng-container *ngFor="let category of user.fixSpendingCategories">
+                    <div class="value">{{category}}</div>
+                </ng-container>
+            </div>
+        </div>
+        <div class="row">
+            <div class="label">Átlagos havi fix költség</div>
+            <div class="value">{{user.avgMonthlyFixedCosts}}</div>
+        </div>
+        <div class="row">
+            <div class="label">Szerep</div>
+            <div class="value">{{user.role}}</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="card">
+    <div class="header">
+        <div class="title">Cikk létrehozása</div>
+        <i class="fa-solid fa-xmark" (click)="onClickClose()"></i>
+    </div>
+    <div class="content">
+        <form [formGroup]="formGroup">
+            <div class="form-group">
+                <label for="title">Cím</label>
+                <input id="title" type="text" formControlName="title">
+            </div>
+            <div class="form-group">
+                <label for="text">Szöveg</label>
+                <textarea id="text" type="text" rows="10" formControlName="text" placeholder="Szöveg..."></textarea>
+            </div>
+            <div class="form-group">
+                <label for="link">Link</label>
+                <input id="link" type="text" formControlName="resourceLink">
+            </div>
+        </form>
+        <div class="button-container">
+            <button (click)="onClickSave()">Mentés</button>
+        </div>
+    </div>
+</div>

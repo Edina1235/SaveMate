@@ -1,0 +1,53 @@
+<div class="card">
+    <div class="header">
+        <div class="title">Új értesítés létrehozása</div>
+        <i class="fa-solid fa-xmark"(click)="onClickClose()"></i>
+    </div>
+    <div class="content">
+        <form [formGroup]="formGroup">
+            <div class="form-group">
+                <label>Felhasználó</label>
+                <div class="row">
+                    <div class="group">
+                        <input id="all" type="radio" value="all" formControlName="user">
+                        <label for="all">Mind</label>
+                    </div>
+                    <div class="group">
+                        <input id="selected" type="radio" value="selected" formControlName="user">
+                        <label for="selected">Kiválasztottak</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" *ngIf="user === 'selected'">
+                <label for="user-id">Id-k:</label>
+                <input id="user-id" type="text" formControlName="userId">
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label for="title">Cím</label>
+                    <input id="title" type="text" formControlName="title">
+                </div>
+                <div class="form-group">
+                    <label for="category">Kategória</label>
+                    <mat-form-field>  
+                        <mat-select formControlName="category">
+                            <mat-select-trigger>
+                                <p>{{selectedCategory}}</p>
+                            </mat-select-trigger>
+                            <mat-option *ngFor="let category of categories; let i = index" [value]="category" (click)="onClickOption(i)">
+                                <p>{{category}}</p>
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="text">Szöveg</label>
+                <textarea id="text" type="text" rows="5" formControlName="text" placeholder="Szöveg..."></textarea>
+            </div>
+        </form>
+        <div class="button-container">
+            <button (click)="onClickSave()">Mentés</button>
+        </div>
+    </div>
+</div>

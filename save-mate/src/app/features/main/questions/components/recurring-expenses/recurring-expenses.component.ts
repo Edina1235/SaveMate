@@ -22,6 +22,10 @@ export class RecurringExpensesComponent {
     this.questionsService.activeStep = QuestionSteps.Expenses;
   }
 
+  public onClickPrevious() {
+    this.questionsService.activeStep = QuestionSteps.GoalDeadline;
+  }
+
   public get avg() {
     return this.recurringExpensesGroup.get('avg')?.value;
   }

@@ -26,6 +26,10 @@ export class DebtQuestionComponent {
     this.router.navigateByUrl(AppUrl.Home);
   }
 
+  public onClickPrevious() {
+    this.questionsService.activeStep = QuestionSteps.PreviousMonthExpenses;
+  }
+
   public get debt() {
     return this.debtQuestionGroup.get('debt')?.value;
   }

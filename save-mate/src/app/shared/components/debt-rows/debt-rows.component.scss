@@ -1,0 +1,172 @@
+@import "src/styles/variables.scss";
+
+form {
+    max-height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    justify-content: center;
+    gap: 1rem;
+    overflow: hidden;
+
+    &.white {
+        .fa-trash-can {
+            color: white;
+        }
+
+        .new-row-container {
+            .amount, .monthly-amount {
+                border: 1px solid white;
+
+                .number, .currency {
+                    color: white;
+                }
+            }
+        }
+
+        .row {
+
+            @media screen and (max-width: 660px) {
+
+                &:has(+ .row)::after {
+                    content: " ";
+                    height: 1px;
+                    grid-column: 1 / -1;
+                    background-color: rgba(white, 0.2);
+                }
+            }
+        }
+
+        .form-group {
+            color: white;
+
+            input {
+                border-bottom: 1px solid white;
+            }
+        }
+    }
+
+    &.dark-green {
+        .fa-trash-can {
+            color: $dark-green;
+        }
+
+        .new-row-container {
+            .amount, .monthly-amount {
+                border: 1px solid $dark-green;
+
+                .number, .currency {
+                    color: $dark-green;
+                }
+            }
+        }
+
+        .form-group {
+            color: $dark-green;
+
+            input {
+                border-bottom: 1px solid $dark-green;
+            }
+        }
+    }
+
+    .rows { 
+        overflow: auto;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            width: 0;
+        }
+    }
+    
+    .input-wrapper {
+        position: relative;
+
+        .suffix {
+            position: absolute;
+            bottom: 0.25rem;
+            right: 0.5rem;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+    }
+
+    .new-row-button {
+        position: relative;
+        height: 2rem;
+        width: 2rem;
+        border-radius: 50%;
+        background-color: $dark-green;
+        border: none;
+
+        i {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            color: $white;
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    .new-row-container {
+        display: grid;
+        grid-template-columns: auto 1fr 1fr;
+        gap: 1rem;
+
+        .amount, .monthly-amount {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            border: 1px solid $dark-green;
+            border-radius: 10px;
+            padding: 0.5rem;
+            align-items: center;
+
+            .number, .currency {
+                color: $dark-green;
+            }
+
+            .currency {
+                opacity: 0.8;
+            }
+        }
+    }
+
+    .row {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+
+        @media screen and (max-width: 660px) {
+            grid-template-columns: 1fr 1fr;
+            margin-top: 1rem;
+
+            &:has(+ .row)::after {
+                content: " ";
+                height: 1px;
+                grid-column: 1 / -1;
+                background-color: rgba($dark-green, 0.2);
+            }
+        }
+    }
+
+    .form-group {
+        display: grid;
+        gap: 1rem;
+        color: $dark-green;
+
+        input {
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid $dark-green;
+            width: 100%;
+
+            &:focus-visible {
+                outline: none;
+            }
+        }
+    }
+}

@@ -3,6 +3,7 @@ import { AppUrl } from '../../enums/app-url.enum';
 import { NavigationEnd, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { filter } from 'rxjs';
+import { ChatComponent } from './components/chat/chat.component';
 
 @Component({
   selector: 'app-piggy-sense-chat',
@@ -24,5 +25,14 @@ export class PiggySenseChatComponent {
         const hiddenRoutes = [AppUrl.Questions];
         this.showChat = !hiddenRoutes.includes(event.urlAfterRedirects);
       });
+  }
+
+  public onClickIcon() {
+    this.dialog.open(ChatComponent, {
+      position: {
+        bottom: '0.5rem',
+        right: '4rem'
+      }
+    });
   }
 }

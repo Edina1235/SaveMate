@@ -1,0 +1,18 @@
+@import "src/styles/variables.scss";
+
+.monogram-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    aspect-ratio: 1/1;
+    gap: 0.125rem;
+    color: $white;
+    background-color: $dark-green;
+    border-radius: 50%;
+    height: -webkit-fill-available;
+
+     @media screen and (max-width: 660px) {
+        font-size: 0.75rem;
+    }
+}

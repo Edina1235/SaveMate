@@ -22,7 +22,7 @@
 
         nav {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
             text-align: center;
             gap: 0.5rem;
 
@@ -58,26 +58,16 @@
             cursor: pointer;
         }
 
+        .avatar-image {
+            margin: 0.5rem;
+        }
+
         .notification-icon {
             position: absolute;
             top: 0.3rem;
             right: 0.3rem;
             font-size: 0.8rem;
             color: #ffa500;
-        }
-
-        .monogram-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 500;
-            aspect-ratio: 1/1;
-            gap: 0.125rem;
-            color: $white;
-            background-color: $dark-green;
-            border-radius: 50%;
-            margin: 0.5rem;
-            height: 100%;
         }
     }
 }
@@ -112,6 +102,10 @@
             cursor: pointer;
         }
 
+        .avatar-image {
+            margin: 0.25rem;
+        }
+
         .notification-sign {
             position: absolute;
             top: 0.15rem;
@@ -120,21 +114,6 @@
             height: 0.5rem;
             background-color: #ffa500;
             border-radius: 50%;
-        }
-
-        .monogram-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 500;
-            aspect-ratio: 1/1;
-            gap: 0.125rem;
-            color: $white;
-            background-color: $dark-green;
-            border-radius: 50%;
-            margin: 0.25rem;
-            height: 100%;
-            font-size: 0.75rem;
         }
     }
 }

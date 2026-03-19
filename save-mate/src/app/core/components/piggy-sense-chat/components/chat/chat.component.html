@@ -1,1 +1,38 @@
-<p>chat works!</p>
+<div class="chat-container">
+    <div class="header">
+        <img src="assets/images/piggy-sense-square-icon.png" alt="">
+        <span>OkosMalac</span>
+        <div class="close">
+            <i class="fa-solid fa-xmark" (click)="onClickClose()"></i>
+        </div>
+    </div>
+    <div class="content" #contentElement>
+        <ng-container *ngFor="let message of messages"> 
+            <ng-container *ngIf="message.senderType === SenderType.AI; else user">
+                <div class="ai-answer">
+                    <img src="assets/images/piggy-sense-square-icon.png" alt="">
+                    <div class="message">{{message.message}}</div>
+                </div>
+            </ng-container>
+            <ng-template #user>
+                <div class="user-question">
+                    <div class="message">{{message.message}}</div>
+                    <ng-container *ngIf="false else monogram">
+                        <img src="" alt="">
+                    </ng-container>
+                    <ng-template #monogram>
+                        <app-monogram [firstName]="'Edina'" [lastName]="'tóth'"></app-monogram>
+                    </ng-template>
+                </div>
+            </ng-template>
+        </ng-container>
+    </div>
+    <div class="footer">
+        <form [formGroup]="formGroup">
+            <textarea name="" id="" placeholder="Üzenet..." formControlName="message"></textarea>
+        </form>
+        <button (click)="onClickSend()" [disabled]="formGroup.invalid">
+            <i class="fa-solid fa-paper-plane"></i>
+        </button>
+    </div>
+</div>

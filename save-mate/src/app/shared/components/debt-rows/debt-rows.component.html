@@ -1,0 +1,56 @@
+<form [formGroup]="debtsGroup" [className]="color">
+    <div class="rows">
+        <ng-container *ngFor="let index of indexes">
+            <div class="row">
+                <div class="form-group">
+                    <label for="name">Név</label>
+                    <input id="name" type="text" [formControlName]="'name_' + index"/>
+                </div>
+                <div class="form-group">
+                    <label for="amount">Fennmaradó összeg</label>
+                    <div class="input-wrapper">
+                        <input id="amount" type="number" [formControlName]="'amount_' + index"/>
+                        <span class="suffix">Ft</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="monthly-amount">Havonta fizetendő</label>
+                    <div class="input-wrapper">
+                        <input id="monthly-amount" type="number" [formControlName]="'monthlyAmount_' + index"/>
+                        <span class="suffix">Ft/hó</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="interest">Kamat</label>
+                    <div class="input-wrapper">
+                        <input id="interest" type="number" [formControlName]="'interest_' + index"/>
+                        <span class="suffix">%</span>
+                    </div>
+                </div>
+                <i class="fa-solid fa-trash-can" (click)="onClickDelete(index)"></i>
+            </div>
+        </ng-container>
+    </div>
+    <div class="new-row-container">
+        <button class="new-row-button"
+                (click)="onClickNewRow()">
+                <i class="fa-solid fa-plus"></i>
+        </button>
+        <div class="amount">
+            <div class="number">
+                {{totalAmount}}
+            </div>
+            <div class="currency">
+                Ft
+            </div>
+        </div>
+        <div class="monthly-amount">
+            <div class="number">
+                {{monthlyAmount}}
+            </div>
+            <div class="currency">
+                Ft/hó
+            </div>
+        </div>
+    </div>
+</form>

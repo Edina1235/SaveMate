@@ -1,1 +1,63 @@
-<p>profil works!</p>
+<div class="profil-container">
+    <div class="profil">
+        <div class="modification-container" (click)="onClickModification()">
+            <i class="fa-solid fa-pen"></i>
+        </div>
+        <div class="header">
+            <app-monogram></app-monogram>
+            <div class="contact">
+                <span class="name">Tóth Edina</span>
+                <span class="email">tothedina2003@gmail.com</span>
+            </div>
+        </div>
+        <div class="content">
+            <div class="row">
+                <p class="label">Havi jövedelem</p>
+                <span>{{450000 | thousandSpace}} Ft</span>
+            </div>
+            <div class="row">
+                <p class="label">Megtakarítás</p>
+                <span>{{120000 | thousandSpace}} Ft</span>
+            </div>
+            <div class="row">
+                <p class="label">Fix költség</p>
+                <span class="icons">
+                    <i [class]="spendingCategoriesIcon.ChildrenPerFamily"></i>
+                    <i [class]="spendingCategoriesIcon.ChildrenPerFamily"></i>
+                    <i [class]="spendingCategoriesIcon.ChildrenPerFamily"></i>
+                    <i [class]="spendingCategoriesIcon.ChildrenPerFamily"></i>
+                </span>
+            </div>
+            <div class="row">
+                <p class="label">Kitűzött spórolási táv</p>
+                <span>10 év</span>
+            </div>
+            <div class="row">
+                <p class="label">Értesítések engedélyezése</p>
+                <mat-slide-toggle [checked]="isNotificationEnabled"
+                                  [color]="'green'"
+                                  [disabled]="true">
+
+                </mat-slide-toggle>
+            </div>
+            <div class="row">
+                <p class="label">Spórolás célja</p>
+                <span>Ház / lakás</span>
+            </div>
+            <div class="row">
+                <p class="label">Tartozások</p>
+                <div class="debts">
+                    <ng-container *ngFor="let debt of debts">
+                        <div class="debt">
+                            <span class="name">{{debt.name}}</span>
+                            <span class="data">{{debt.totalAmount | thousandSpace}} Ft</span>
+                            <span class="data">{{debt.monthlyPayment | thousandSpace}} Ft/hó</span>
+                            <span class="data">{{debt.interest}}%</span>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+        <div class="footer" (click)="onClickDelete()">Profil törlése</div>
+    </div>
+</div>

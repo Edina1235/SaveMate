@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { NotificationsComponent } from './notifications.component';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -9,6 +10,7 @@ import { RouterModule } from '@angular/router';
     NotificationsComponent
   ],
   imports: [
+    SharedModule,
     RouterModule.forChild([
       { path: '', component: NotificationsComponent },
     ])

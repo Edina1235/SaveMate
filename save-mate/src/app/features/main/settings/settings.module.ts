@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SettingsComponent } from './settings.component';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -9,6 +10,7 @@ import { RouterModule } from '@angular/router';
     SettingsComponent
   ],
   imports: [
+    SharedModule,
     RouterModule.forChild([
       { path: '', component: SettingsComponent },
     ])

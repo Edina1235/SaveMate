@@ -1,0 +1,108 @@
+@import "src/styles/variables.scss";
+
+.chat-container {
+    width: clamp(340px, 33vw, 900px);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 0.5rem;
+    height: min(75vh, 500px);
+}
+
+.header {
+    padding: 0.5rem;
+    display: grid;
+    grid-template-columns: 2rem 1fr auto;
+    gap: 0.5rem;
+    background-color: $dark-green;
+    align-items: center;
+    color: white;
+
+    .fa-xmark {
+        font-size: 1.2rem;
+
+        &:hover {
+            filter: brightness(0.8);
+            cursor: pointer;
+        }
+    }
+}
+
+img {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+}
+
+.user-question, .ai-answer {
+    display: flex;
+    gap: 0.5rem;
+    max-width: 100%;
+    min-width: 0;
+
+    app-monogram, img {
+        height: 2rem;
+        width: 2rem;
+    }
+
+    .message {
+        background-color: $light-green;
+        color: white;
+        border-radius: 10px;
+        padding: 0.5rem;
+    }
+}
+
+.user-question {
+    justify-content: right;
+}
+
+.ai-answer {
+    justify-content: left;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+}
+
+.footer {
+    display: grid;
+    grid-template-columns: 1fr 2rem;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    align-items: center;
+
+    form textarea {
+        width: calc(100% - 1rem);
+        border: 1px solid $dark-green;
+        border-radius: 10px;
+        padding: 0.5rem;
+        
+        &:focus-visible {
+            outline: none;
+        }
+    }
+}
+
+button {
+    background-color: $dark-green;
+    border-radius: 50%;
+    border: none;
+    aspect-ratio: 1/1;
+
+    i {
+        color: white;
+        transform: rotate(45deg);
+    }
+
+    &:disabled {
+        opacity: 0.6;
+    }
+}

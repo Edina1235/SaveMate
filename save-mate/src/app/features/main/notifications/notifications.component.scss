@@ -1,0 +1,182 @@
+@import "src/styles/variables.scss";
+
+.notification-container {
+    height: 100%;
+
+    &:has(.without-notification) {
+        display: grid;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .without-notification {
+        display: grid;
+
+        .icon-container {
+            position: relative;
+            text-align: center;
+        }
+
+        .line {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 0.75rem;
+            height: 14rem;
+            background-color: $dark-green;
+            transform: rotate(45deg);
+        }
+
+        i {
+            color: white;
+            font-size: 12rem;
+        }
+
+        h1 {
+            color: $dark-green;
+        }
+
+        @media screen and (max-width: 660px) {
+            .line {
+                width: 0.5rem;
+                height: 10rem;
+            }
+
+            i {
+                font-size: 8rem;
+            }
+
+            h1 {
+                font-size: 1.2rem;
+            }
+        }
+    }
+
+    .with-notification {
+        height: 100%;
+        display: grid;
+        grid-template-columns: 12rem 1fr;
+        gap: 0.5rem;
+        width: clamp(340px, 90vw, 1000px);
+        margin: 0.5rem auto;
+
+        &.mobile {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto 1fr;
+
+            .back-arrow {
+                color: white;
+
+                &:hover {
+                    filter: brightness(0.8);
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .title-container, .message {
+            height: auto;
+            background-color: white;
+            border-radius: 10px;
+            height: fit-content;
+
+            .message-title {
+                padding: 0.5rem 0.75rem;
+
+                &:hover {
+                    cursor: pointer;
+                    background-color: rgba($light-green, 0.2);
+                }
+
+                &.active {
+                    background-color: rgba($light-green, 0.4);
+                }
+            }
+        }
+
+        .title-container {
+            padding: 0.5rem 0;
+
+            .title {
+                padding: 0 0.5rem;
+            }
+        }
+
+        .content {
+            display: grid;
+        }
+
+        .message {
+            display: grid;
+            gap: 0.5rem;
+            padding: 0.5rem;
+        }
+
+        h1, h3 {
+            font-size: 1.2rem;
+            color: $dark-green;
+            margin: 0;
+        }
+
+        h1 {
+            margin-bottom: 0.5rem;
+        }
+
+        h2, p {  
+            font-size: 1rem;
+            color: rgba($dark-green, 0.8);
+            margin: 0;
+            font-weight: 500;
+        }
+
+        span, a {
+            color: rgba($dark-green, 0.5);
+        }
+
+        .message-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+
+            .message { 
+                display: grid;
+                grid-template-columns: 1fr auto;
+                gap: 0.5rem;
+
+                .content {
+                    display: grid;
+                    gap: 0.5rem;
+                }
+            }
+
+            .button-container {
+                display: grid;
+                height: 100%;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 1fr;
+                align-items: center;
+                gap: 0.5rem;
+
+                .read-status {
+                    color: $green;
+                }
+
+                .delete {
+                    color: $delete-btn-color;
+                }
+
+                .read-status, .delete {
+                    &:hover {
+                        opacity: 0.6;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}

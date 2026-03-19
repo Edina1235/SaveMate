@@ -1,0 +1,117 @@
+@import "src/styles/variables.scss";
+
+.profil-container {
+    height: 100%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    
+    .profil {
+        background-color: white;
+        border-radius: 10px;
+        width: clamp(300px, 90vw, 600px);
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        position: relative;
+        padding: 0.5rem;
+        gap: 1rem;
+
+        .modification-container {
+            position: absolute;
+            background-color: $dark-green;
+            color: white;
+            top: 0;
+            right: 0;
+            padding: 0.75rem;
+            border-radius: 0 10px 0 10px;
+            cursor: pointer;
+
+            &:hover {
+                filter: brightness(1.2);
+            }
+        }
+
+        .header {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 0.5rem;
+
+            .contact {
+                display: flex;
+                flex-direction: column;
+
+                .name {
+                    color: $dark-green
+                }
+
+                .email {
+                    color: $light-green;
+                    font-size: 0.85rem;
+                }
+            }
+        }
+
+        .content {
+            padding: 0.5rem;
+            display: grid;
+            gap: 0.75rem;
+        
+            .row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .label {
+                    color: $dark-green;
+                    font-style: italic;
+                    margin: 0;
+                    font-weight: 600;
+                }
+
+                span {
+                    color: $light-green;
+
+                    &.icons {
+                        display: flex;
+                        gap: 0.5rem;
+                    }
+                }
+
+                .debts {
+                    display: grid;
+                    gap: 0.5rem;
+
+                    .debt {
+                        display: grid;
+                        text-align: right;
+
+                        .data {
+                            color: rgba($light-green, 0.6);
+                            font-size: 0.85rem;
+                        }
+                    }
+                }
+            }
+        }
+
+        .footer {
+            font-style: italic;
+            padding: 0 0.5rem;
+            color: rgba($light-green, 0.6);
+            font-weight: 600;
+            cursor: pointer;
+
+            &:hover {
+                color: $light-green;
+            }
+        }
+    }
+}
+
+::ng-deep .mat-mdc-slide-toggle .mdc-switch.mdc-switch--selected:enabled .mdc-switch__handle::after {
+    background: $dark-green !important;
+}
+
+::ng-deep .mat-mdc-slide-toggle .mdc-switch:enabled .mdc-switch__track::after {
+    background: rgba($light-green, 0.6) !important;
+}

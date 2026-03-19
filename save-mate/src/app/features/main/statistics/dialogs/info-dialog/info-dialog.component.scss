@@ -1,0 +1,10 @@
+@import "src/styles/variables.scss";
+
+p {
+    color: $dark-green;
+
+    span {
+        font-size: 1.4rem;
+        font-weight: bold;
+    }
+}

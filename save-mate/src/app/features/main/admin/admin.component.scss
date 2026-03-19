@@ -1,0 +1,52 @@
+@import "src/styles/variables.scss";
+
+.admin-container {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0.5rem;
+    width: clamp(340px, 90vw, 1000px);
+    height: 100%;
+
+    .content {
+        overflow-x: auto;
+        width: 100%;
+
+        .date {
+            text-wrap: nowrap;
+        }
+
+        .action-container {
+            display: flex;
+            gap: 0.5rem;
+
+            i {
+                &.fa-pen {
+                    color: $dark-green;
+                }
+
+                &.fa-trash-can {
+                    color: $delete-btn-color;
+                }
+
+                &.fa-angle-right {
+                    color: $dark-green;
+                }
+
+                &:hover {
+                    cursor: pointer;
+                    filter: brightness(1.2);
+                }
+            }
+        }
+    }
+}
+
+:host {
+    overflow: auto;
+    scrollbar-width: 0;
+    margin: 0.5rem auto;
+
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+}

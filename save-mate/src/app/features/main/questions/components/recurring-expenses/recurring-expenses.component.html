@@ -11,7 +11,11 @@
             </div>
         </div>
     </form>
-    <button class="next-button"
-            [disabled]="avg === ''"
-            (click)="onClickNext()">Következő</button>
+    <div class="button-container">
+        <button class="previous-button"
+            (click)="onClickPrevious()">Előző</button>
+        <button class="next-button"
+                [disabled]="avg === ''"
+                (click)="onClickNext()">Következő</button>
+    </div>
 </div>

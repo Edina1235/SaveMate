@@ -8,5 +8,11 @@
             </div>
         </div>
     </form>
-    <button class="next-button" [disabled]="income === ''" (click)="onClickNext()">Következő</button>
+    <div class="button-container">
+        <button class="previous-button"
+                [disabled]="true">Előző</button>
+        <button class="next-button" 
+                [disabled]="income === ''" 
+                (click)="onClickNext()">Következő</button>
+    </div>
 </div>

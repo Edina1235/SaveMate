@@ -1,0 +1,57 @@
+@import "src/styles/variables.scss";
+
+.button-container {
+    display: grid;
+    width: 100%;
+    padding: 0.5rem 0 0;
+}
+
+.header {
+    margin-bottom: 0.5rem;
+    gap: 1rem;
+} 
+
+.input-wrapper {
+    position: relative;
+
+    .suffix {
+        position: absolute;
+        bottom: 0.25rem;
+        right: 0.5rem;
+        opacity: 0.8;
+        font-size: 0.9rem;
+    }
+}
+
+.form-group {
+    display: grid;
+    margin-top: 2rem;
+    gap: 1rem;
+    color: $dark-green;
+
+    input {
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid $dark-green;
+        width: 100%;
+
+        &:focus-visible {
+            outline: none;
+        }
+    }
+}
+
+button {
+    border: none;
+    border-radius: 10px;
+    background-color: $dark-green;
+    color: white;
+    padding: 0.5rem 1rem;
+    width: 33%;
+    margin: auto;
+
+    &:hover {
+        filter: brightness(1.2);
+        cursor: pointer;
+    }
+}

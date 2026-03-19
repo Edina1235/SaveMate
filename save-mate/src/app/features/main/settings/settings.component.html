@@ -1,1 +1,130 @@
-<p>settings works!</p>
+<div class="settings-container">
+    <div class="wrapper">
+        <div class="title">Avatar választó</div>
+        <div class="divider"></div>
+        <div class="content">
+            <div *ngFor="let avatarImg of avatarImgs" 
+                 class="avatar-container" 
+                 [class.active]="avatarImg === activeAvatar" 
+                 (click)="onClickAvatar(avatarImg)">
+                <img class="avatar" [src]="'/assets/images/avatars/' + avatarImg"/>
+            </div>
+            <app-monogram class="monogram-desktop"
+                          [firstName]="firstName" [lastName]="lastName" 
+                          [fontsize]="'2.5rem'"
+                          [class.active]="activeAvatar === 'monogram'"
+                          (click)="onClickMonogram()"></app-monogram>
+
+            <app-monogram class="monogram-mobile"
+                          [firstName]="firstName" [lastName]="lastName" 
+                          [fontsize]="'1.25rem'"
+                          [class.active]="activeAvatar === 'monogram'"
+                          (click)="onClickMonogram()"></app-monogram>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="title">Személyes adatok</div>
+        <div class="divider"></div>
+        <div class="content">
+            <form class="user">
+                <div class="form-group">
+                    <label>Vezetéknév</label>
+                    <input type="text">
+                </div>
+                <div class="form-group">
+                    <label>Keresztnév</label>
+                    <input type="text">
+                </div>
+                <div class="form-group">
+                    <label>Felhasználónév</label>
+                    <input type="text">
+                </div>
+                <div class="form-group">
+                    <label>Email cím</label>
+                    <input type="text">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="title">Pénzügyek</div>
+        <div class="divider"></div>
+        <div class="content">
+            <form class="payment">
+                <div class="form-group">
+                    <label>Havi jövedelme</label>
+                    <input type="text">
+                </div>
+                <div class="form-group">
+                    <label>Megtakarítás</label>
+                    <input type="text">
+                </div>
+                <div class="form-group">
+                    <label>Fix költség</label>
+                    <input type="text">
+                </div>
+                <div class="form-group">
+                    <label>Fix költség (kategóriák)</label>
+                    <app-spending-category-icons></app-spending-category-icons>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="title">Spórolással kapcsolatos adatok</div>
+        <div class="divider"></div>
+        <div class="content">
+            <form class="saving-payment">
+                <div class="form-group">
+                    <label>Spórolás célja</label>
+                    <input type="text"> <!-- TODO: Ezt az inputot lecserélni a checkboxokra -->
+                </div>
+                <div class="form-group">
+                    <label>Kitűzött spórolási táv</label>
+                    <input type="text">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="title">Értesítések</div>
+        <div class="divider"></div>
+        <div class="content">
+            <form class="saving-payment">
+                <div class="form-group">
+                    <label>Engedélyezése</label>
+                    <mat-slide-toggle [checked]="true"
+                                      [color]="'green'">
+                    </mat-slide-toggle>
+                </div>
+                <div class="form-group">
+                    <label>Új létrehozása</label>
+                    <input type="text"> <!-- TODO: form létrehozása az értesítések létrhozásához -->
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="title">Tartozások</div>
+        <div class="divider"></div>
+        <div class="content">
+            <app-debt-rows [color]="'white'"></app-debt-rows>
+        </div>
+    </div>
+    <div class="button-wrapper">
+        <button class="save-button" (click)="onClickSave()">Mentés</button>
+    </div>
+</div> 
+<!-- TODO: formgroup-ok -->
+<!-- TODO: mentés gomb csak akkor működjön, ha minden formgroup valid -->
+<!-- TODO: question-öknél visszagomb esetén betöltse az adatokat -->
+<!-- TODO: question-öknél ellenőrizni h minden oldalnál van e checkolás a betöltött adatokra -->
+<!-- TODO: Input Output megvalósítás -->
+<!-- TODO: notification settings, alert hozzáadása -->
+
+<!-- TODO: Admin felület elkészítése: 
+        Felhasználok (crud), 
+        Üzenetek listázása (kategrória, felhasználónév, email, üzenet), 
+        notification-ök létrehozása (megadni h melyik felhasználónak,...) -->
+<!-- TODO: dialogok létrehozása -->
+<!-- TODO: törlés ikon a sorokhoz -->

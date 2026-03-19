@@ -20,6 +20,10 @@ export class SavedAmountComponent {
     this.questionsService.activeStep = QuestionSteps.Goals;
   }
 
+  public onClickPrevious() {
+    this.questionsService.activeStep = QuestionSteps.Income;
+  }
+
   public get savedAmount() {
     return this.savedAmountGroup.get('savedAmount')?.value;
   }

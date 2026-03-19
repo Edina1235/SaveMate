@@ -7,7 +7,7 @@ import { Expense } from 'src/app/core/models/expense';
 import { ExpenseInput } from 'src/app/core/models/expense-input';
 import { Goal } from 'src/app/core/models/goal';
 import { Income } from 'src/app/core/models/income';
-import { User } from 'src/app/core/models/user';
+import { Role, User } from 'src/app/core/models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -116,7 +116,8 @@ export class QuestionsService {
       isGlobalNotificationsEnabled: true,
       topSpendingCategories: [],
       fixSpendingCategories: [],
-      avgMonthlyFixedCosts: 1
+      avgMonthlyFixedCosts: 1,
+      role: Role.Admin
     } as User;
   }
 }

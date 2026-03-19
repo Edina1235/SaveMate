@@ -21,6 +21,10 @@ export class GoalDeadlineComponent {
     this.questionsService.activeStep = QuestionSteps.RecurringExpenses;
   }
 
+  public onClickPrevious() {
+    this.questionsService.activeStep = QuestionSteps.Goals;
+  }
+
   public get years() {
     return this.goalDeadline.get('years')?.value;
   }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AppUrl } from 'src/app/core/enums/app-url.enum';
@@ -12,7 +13,8 @@ export class HeaderSubMenuComponent {
   public AppUrl = AppUrl;
 
   constructor(private dialogRef: MatDialogRef<HeaderSubMenuComponent>,
-              private router: Router
+              private router: Router,
+              private afAuth: AngularFireAuth
   ) {}
 
   public onClickPiggySense() {}
@@ -34,6 +36,7 @@ export class HeaderSubMenuComponent {
   }
 
   public onClickLogout() {
+    this.afAuth.signOut();
     this.router.navigateByUrl(AppUrl.Login);
     this.closeDialog();
   }

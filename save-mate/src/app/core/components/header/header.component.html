@@ -11,6 +11,9 @@
            <a [routerLink]="AppUrl.KnowledgeBase" routerLinkActive="active">
                 Tudástár
             </a> 
+            <a [routerLink]="AppUrl.Admin" routerLinkActive="active">
+                Admin
+            </a> 
         </nav>
     </div>
     <div class="sub-menu" (click)="onClickOpenSubMenu()">
@@ -22,10 +25,7 @@
                 <img src="" alt="">
             </ng-container>
             <ng-template #monogram>
-                <div class="monogram-container">
-                    <div class="last-name">T</div>
-                    <div class="first-name">E</div>
-                </div>
+                <app-monogram [firstName]="'Edina'" [lastName]="'tóth'"></app-monogram>
             </ng-template>
         </div>
     </div>
@@ -41,10 +41,7 @@
                 <img src="" alt="">
             </ng-container>
             <ng-template #monogram>
-                <div class="monogram-container">
-                    <div class="last-name">T</div>
-                    <div class="first-name">E</div>
-                </div>
+                <app-monogram [firstName]="'Edina'" [lastName]="'tóth'"></app-monogram>
             </ng-template>
         </div>
     </div>
