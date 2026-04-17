@@ -6,12 +6,16 @@ import { RecurringExpense } from '../models/recurring-expense';
   providedIn: 'root'
 })
 export class RecurringExpenseService {
-private backendLink: string = "http://localhost:3000/recurring-expenses";
+  private backendLink: string = "http://localhost:3000/recurring-expenses";
 
   constructor(private http: HttpClient) { }
 
   public getRecurringExpense(id: string) {
     return this.http.get(`${this.backendLink}/${id}`);
+  }
+
+  public getRecurringExpensesByUserId(userId: string) {
+    return this.http.get(`${this.backendLink}/user/${userId}`);
   }
 
   public getRecurringExpenses() {

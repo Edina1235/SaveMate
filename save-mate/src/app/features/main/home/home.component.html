@@ -1,17 +1,22 @@
 <div class="home-container">
     <!-- Income -->
-    <div class="card income">
-        <div class="title">Bevétel</div>
+    <div class="card-with-plus income">
+        <div class="header">
+            <div class="title">Bevétel</div>
+            <div class="plus" (click)="onClickOpenAddingIncomeDialog()">
+                <i class="fa-solid fa-plus"></i>
+            </div>
+        </div>
         <div class="content">
             <div class="current">
                 <div class="amount">
-                    {{120000 | thousandSpace}} <span>Ft</span>
+                    {{currentIncome | thousandSpace}} <span>Ft</span>
                 </div>
             </div>
             <div class="max">
                 <span class="label">Összes</span>
                 <div class="amount">
-                    {{240000 | thousandSpace}} <span>Ft</span>
+                    {{totalIncome | thousandSpace}} <span>Ft</span>
                 </div>
             </div>
         </div>
@@ -28,13 +33,13 @@
             <div class="current">
                 <span class="label">Jelenlegi</span>
                 <div class="amount">
-                    {{60000 | thousandSpace}} <span>Ft</span>
+                    {{currentSaving | thousandSpace}} <span>Ft</span>
                 </div>
             </div>
             <div class="max">
                 <span class="label">Összes</span>
                 <div class="amount">
-                    {{120000 | thousandSpace}} <span>Ft</span>
+                    {{totalSaving | thousandSpace}} <span>Ft</span>
                 </div>
             </div>
         </div>
@@ -66,13 +71,13 @@
             <div class="current">
                 <span class="label">Jelenlegi</span>
                 <div class="amount">
-                    {{60000 | thousandSpace}} <span>Ft</span>
+                    {{currentFixSpending | thousandSpace}} <span>Ft</span>
                 </div>
             </div>
             <div class="max">
                 <span class="label">Összes</span>
                 <div class="amount">
-                    {{120000 | thousandSpace}} <span>Ft</span>
+                    {{totalFixSpending | thousandSpace}} <span>Ft</span>
                 </div>
             </div>
         </div>

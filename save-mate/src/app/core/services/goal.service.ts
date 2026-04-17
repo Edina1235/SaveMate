@@ -14,6 +14,10 @@ private backendLink: string = "http://localhost:3000/goals";
     return this.http.get(`${this.backendLink}/${id}`);
   }
 
+  public getGoalsByUserId(userId: string) {
+    return this.http.get(`${this.backendLink}/user/${userId}`);
+  }
+
   public getGoals() {
     return this.http.get(this.backendLink);
   }

@@ -20,14 +20,38 @@ router.get("/", authMiddleware, async (req, res) => {
   }
 });
 
+router.get("/user/:userId", async (req, res) => {
+  try {
+    const snapshot = await db
+      .collection("debts")
+      .where("userId", "==",req.params.userId)
+      .get();
+
+    if (snapshot.empty) {
+      return res.status(404).json({ message: "Debts not found" });
+    }
+
+    const debts = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+
+    res.json(debts);
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 router.post("/", async (req, res) => {
   try {
     const data = req.body;
-    const docRef = await db.collection("debts").add(data);
+    const { id, ...dataWithoutId } = data;
+    const docRef = await db.collection("debts").add(dataWithoutId);
 
     res.json({
       id: docRef.id,
-      ...data
+      ...dataWithoutId
     });
 
   } catch (err) {

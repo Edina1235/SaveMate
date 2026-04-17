@@ -19,7 +19,7 @@
             </div>
         </form>
         <div class="button-container">
-            <button (click)="onClickSave()">Mentés</button>
+            <button [disabled]="formGroup.invalid" (click)="onClickSave()">Mentés</button>
         </div>
     </div>
 </div>

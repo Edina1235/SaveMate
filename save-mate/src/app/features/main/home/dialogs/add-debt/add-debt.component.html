@@ -4,9 +4,11 @@
         <i class="fa-solid fa-xmark" (click)="onClickClose()"></i>
     </div>
     <div class="content">
-       <app-debt-rows></app-debt-rows> 
+       <app-debt-rows [debtsInput]="debtInputs"
+                   (debtDataChange)="dataChange($event)"
+                   (validGroup)="invalidChange($event)"></app-debt-rows> 
        <div class="button-container">
-            <button (click)="onClickSave()">Kész</button>
+            <button [disabled]="!isValidGroup" (click)="onClickSave()">Kész</button>
        </div>
     </div>
 </div>

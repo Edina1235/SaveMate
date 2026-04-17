@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Debt } from 'src/app/core/models/debt';
 import { QuestionsService } from '../../questions.service';
 import { QuestionSteps } from 'src/app/core/enums/question-steps.enum';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -21,7 +20,7 @@ export class DebtDelayComponent implements OnInit {
 
   ngOnInit(): void {
     this.setEnabledButton();
-    this.debtDelayGroup.valueChanges.subscribe(debtDelayValue => {
+    this.debtDelayGroup.valueChanges.subscribe({next: debtDelayValue => {
       let hasCheckedDebt = false;
 
       for(let i = 0; i < this.debts.length; i++) {
@@ -32,7 +31,13 @@ export class DebtDelayComponent implements OnInit {
          || debtDelayValue.debtDelay === 'yes' && hasCheckedDebt) 
          this.enabledButton = true;
       else this.enabledButton = false;
-    });
+    }, error: error => console.error(error)});
+
+    if(this.debts) {
+      for(let i = 0; i < this.debts.length; i++) {
+        this.debtDelayGroup.get('debt'+i)?.setValue(this.debts[i].hasArrears);
+      }
+    }
   }
 
   private setEnabledButton() {
@@ -61,6 +66,7 @@ export class DebtDelayComponent implements OnInit {
     for(let i = 0; i < this.debts.length; i++) {
       if(this.debtDelayGroup.get('debt'+i)?.value)
         this.debts[i].hasArrears = true;
+      this.debts[i].hasArrears = false;
     }
   }
 
@@ -70,6 +76,7 @@ export class DebtDelayComponent implements OnInit {
   }
 
   public onClickPrevious() {
+    this.setCheckedDebts();
     this.questionsService.activeStep = QuestionSteps.Debts;
   }
 

@@ -3,13 +3,7 @@
         <div class="title">Felhasználók</div>
         <div class="content">
             <div class="mat-elevation-z8">
-              <table mat-table [dataSource]="dataSource">
-
-                <!-- Id Column -->
-                <ng-container matColumnDef="id">
-                  <th mat-header-cell *matHeaderCellDef> Id </th>
-                  <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-                </ng-container>
+              <table *ngIf="dataSource" mat-table [dataSource]="dataSource">
 
                 <!-- Email Column -->
                 <ng-container matColumnDef="email">
@@ -80,13 +74,7 @@
         <div class="title">Üzenetek a felhasználóktól</div>
         <div class="content">
           <div class="mat-elevation-z8">
-              <table mat-table [dataSource]="contactDataSource">
-
-                <!-- Id Column -->
-                <ng-container matColumnDef="id">
-                  <th mat-header-cell *matHeaderCellDef> Id </th>
-                  <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-                </ng-container>
+              <table *ngIf="contactDataSource" mat-table [dataSource]="contactDataSource">
 
                 <!-- Email Column -->
                 <ng-container matColumnDef="email">
@@ -132,13 +120,7 @@
       </div>
         <div class="content">
           <div class="mat-elevation-z8">
-              <table mat-table [dataSource]="notificationDataSource">
-
-                <!-- Id Column -->
-                <ng-container matColumnDef="id">
-                  <th mat-header-cell *matHeaderCellDef> Id </th>
-                  <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-                </ng-container>
+              <table *ngIf="notificationDataSource" mat-table [dataSource]="notificationDataSource">
 
                 <!-- Email Column -->
                 <ng-container matColumnDef="email">
@@ -196,13 +178,7 @@
       </div>
         <div class="content">
           <div class="mat-elevation-z8">
-              <table mat-table [dataSource]="knowledgeBaseDataSource">
-
-                <!-- Id Column -->
-                <ng-container matColumnDef="id">
-                  <th mat-header-cell *matHeaderCellDef> Id </th>
-                  <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-                </ng-container>
+              <table *ngIf="knowledgeBaseDataSource" mat-table [dataSource]="knowledgeBaseDataSource">
 
                 <!-- Title Column -->
                 <ng-container matColumnDef="title">

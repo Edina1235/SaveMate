@@ -1,12 +1,12 @@
 @import "src/styles/variables.scss";
 
 .knowledge-base-container {
-    height: 100%;
+    height: calc(100% - 1rem);
     display: grid;
     grid-template-columns: 12rem 1fr;
     gap: 0.5rem;
     width: clamp(340px, 90vw, 1000px);
-    margin: 0.5rem auto;
+    margin: 0.5rem auto 0.5rem;
 
     &.mobile {
         grid-template-columns: 1fr;
@@ -70,11 +70,15 @@
         margin-bottom: 0.5rem;
     }
 
-    h2, p {  
+    a.article-title, p {  
         font-size: 1rem;
         color: rgba($dark-green, 0.8);
         margin: 0;
         font-weight: 500;
+    }
+
+    a.article-title {
+        text-decoration: none;
     }
 
     span, a {
@@ -85,10 +89,20 @@
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
+        overflow-y: auto;
+        scrollbar-width: 0;
+
+        &::-webkit-scrollbar {
+            width: 0;
+        }
     }
 
     .footer {
         display: flex;
         justify-content: space-between;
     }
+}
+
+:host {
+    overflow: hidden;
 }

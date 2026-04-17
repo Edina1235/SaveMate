@@ -1,11 +1,15 @@
 <div class="previous-month-expenses-container">
     <h1>Előző havi költései</h1>
-    <app-expenses-row [expenses]="expenses" (expensesOutput)="setExpenses($event)" (validGroup)="setValidForm($event)"></app-expenses-row>
+    <app-expenses-row [expenses]="expenses" 
+                      (expensesOutput)="setExpenses($event)"
+                      (expensesCsvOutput)="setExpensesCsv($event)"
+                      (incomes)="setIncomes($event)"
+                      (validGroup)="setValidForm($event)"></app-expenses-row>
     <div class="button-container">
         <button class="previous-button"
             (click)="onClickPrevious()">Előző</button>
         <button class="next-button"
-                [disabled]="expenses.length && validForm"
+                [disabled]="!(expenses.length && validForm)"
                 (click)="onClickNext()">Következő</button>
     </div>
 </div>

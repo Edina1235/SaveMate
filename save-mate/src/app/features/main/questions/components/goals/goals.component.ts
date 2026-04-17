@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Goals } from 'src/app/core/enums/goals.enum';
 import { QuestionsService } from '../../questions.service';
@@ -9,7 +9,7 @@ import { QuestionSteps } from 'src/app/core/enums/question-steps.enum';
   templateUrl: './goals.component.html',
   styleUrls: ['./goals.component.scss']
 })
-export class GoalsComponent {
+export class GoalsComponent implements OnInit {
   public goals = Object.values(Goals);
   public goalsForm: FormGroup = new FormGroup({
     other: new FormControl(''),
@@ -20,6 +20,23 @@ export class GoalsComponent {
   constructor(private questionsService: QuestionsService) {
     this.fillFormGroup();
     this.setOtherValue();
+  }
+
+  ngOnInit(): void {
+      if(this.questionsService.goals) {
+        this.goalsForm.get('amount')?.setValue(this.questionsService.goals.targetAmount);
+        for(let i = 0; i < this.questionsService.goals.target.length; i++) {
+          if(this.goals.includes(this.questionsService.goals.target[i] as Goals)) {
+            const index = this.goals.findIndex(g => g === this.questionsService.goals?.target[i]);
+            this.goalsForm.get('goal'+index)?.setValue(true);
+
+          }
+          else {
+            this.goalsForm.get('other')?.setValue(true);
+            this.goalsForm.get('otherName')?.setValue(this.questionsService.goals.target[i]);
+          }
+        }
+      }
   }
 
   private fillFormGroup() {
@@ -67,6 +84,7 @@ export class GoalsComponent {
   }
 
   public onClickPrevious() {
+    this.setGoalTarget();
     this.questionsService.activeStep = QuestionSteps.SavedAmount;
   }
 }

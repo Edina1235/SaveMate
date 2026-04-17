@@ -14,6 +14,10 @@ private backendLink: string = "http://localhost:3000/expenses";
     return this.http.get(`${this.backendLink}/${id}`);
   }
 
+  public getExpensesByUserId(userId: string) {
+    return this.http.get(`${this.backendLink}/user/${userId}`);
+  }
+
   public getExpenses() {
     return this.http.get(this.backendLink);
   }

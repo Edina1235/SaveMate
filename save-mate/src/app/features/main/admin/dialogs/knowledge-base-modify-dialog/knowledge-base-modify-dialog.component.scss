@@ -45,7 +45,11 @@ textarea:focus-visible {
         padding: 0.5rem 1rem;
         font-weight: 500;
 
-        &:hover {
+        &:disabled {
+            opacity: 0.6;
+        }
+
+        &:not(:disabled):hover {
             filter: brightness(1.2);
             cursor: pointer;
         }

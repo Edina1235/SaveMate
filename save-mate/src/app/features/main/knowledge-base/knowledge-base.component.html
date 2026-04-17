@@ -1,4 +1,4 @@
-<div class="knowledge-base-container" [class]="screen">
+<div *ngIf="articles.length" class="knowledge-base-container" [class]="screen">
     <div *ngIf="screen === 'mobile' && activeTitle !== ''"
         class="back-arrow">
         <i class="fa-solid fa-arrow-left"
@@ -7,17 +7,17 @@
     <div *ngIf="(screen === 'mobile' && activeTitle === '') || screen === 'desktop'" class="title-container">
         <h1 class="title">Címek</h1>
         <div class="content">
-            <ng-container *ngFor="let title of titles">
-                <h2 class="article-title"
-                    [class.active]="title === activeTitle"
-                    (click)="onClickTitle(title)">{{title}}</h2>
+            <ng-container *ngFor="let article of articles">
+                <a [href]="" class="article-title"
+                    [class.active]="article.title === activeTitle"
+                    (click)="onClickTitle(article)">{{article.title}}</a>
             </ng-container>
         </div>
     </div>
     <div *ngIf="(screen === 'mobile' && activeTitle !== '') || screen === 'desktop'" class="article-container">
         <ng-container *ngFor="let article of articles">
             <ng-container *ngIf="(screen === 'mobile' && activeTitle === article.title) || screen === 'desktop'">
-                <div class="article">
+                <div [id]="article.id" class="article">
                     <h3 class="title">{{article.title}}</h3>
                     <p class="text">{{article.text}}</p>
                     <small class="footer">
@@ -29,4 +29,3 @@
         </ng-container>
     </div>
 </div>
-<!-- TODO: cikkek keresése ide -->

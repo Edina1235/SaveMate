@@ -23,7 +23,6 @@ router.get("/", authMiddleware, async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const user = req.body;
-    console.log(user);
     const docRef = await db.collection("users").doc(user.id).set(user);
 
     res.json({
@@ -74,6 +73,23 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", authMiddleware, async (req, res) => {
   try {
     const id = req.params.id;
+    const collectionsToDelete = [
+      "alerts",
+      "contactMessages",
+      "debts",
+      "expenses",
+      "goals",
+      "income",
+      "notifications",
+      "recurringExpenses"
+    ];
+
+    for (const col of collectionsToDelete) {
+      const snapshot = await db.collection(col).where("userId", "==", userId).get();
+      const batch = db.batch();
+      snapshot.forEach(doc => batch.delete(doc.ref));
+      await batch.commit();
+    }
 
     await db.collection("users").doc(id).delete();
 

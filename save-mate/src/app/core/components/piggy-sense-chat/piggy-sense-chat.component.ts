@@ -21,10 +21,10 @@ export class PiggySenseChatComponent {
       .pipe(
         filter(event => event instanceof NavigationEnd)
       )
-      .subscribe((event: any) => {
+      .subscribe({next: (event: any) => {
         const hiddenRoutes = [AppUrl.Questions];
         this.showChat = !hiddenRoutes.includes(event.urlAfterRedirects);
-      });
+      }, error: error => console.error(error) });
   }
 
   public onClickIcon() {

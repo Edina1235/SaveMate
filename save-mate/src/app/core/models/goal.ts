@@ -3,6 +3,5 @@ export interface Goal {
     userId: string;
     target: string[];
     targetAmount: number;
-    savedAmount: number;
     deadline: Date;
 }

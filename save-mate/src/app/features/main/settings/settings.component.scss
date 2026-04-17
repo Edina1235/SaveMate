@@ -23,6 +23,13 @@
         flex-wrap: wrap;
         gap: 0.5rem;
     }
+
+    .alert.wrapper .content .saving-payment {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: auto 1fr;
+    }
+
     .avatar-container {
         display: flex;
         justify-content: center;
@@ -149,7 +156,7 @@
             bottom: -1.2rem;
         }
 
-        input {
+        input[type='text'], input[type='number'], select {
             background-color: transparent;
             border: none;
             border-bottom: 1px solid $white;
@@ -171,6 +178,122 @@
         border-radius: 10px;
         font-weight: 600;
         font-size: 1rem;
+
+        &:disabled {
+            opacity: 0.6;
+        }
+    }
+}
+
+.alerts .form-group input {
+    padding-top: 0.75rem;
+}
+
+.saving-payment {
+    display: grid;
+    grid-template-areas: "goals goals"
+                         "amount years" ;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr auto;
+
+    .goals {
+        grid-area: goals;
+    }
+
+    .amount {
+        grid-area: amount;
+    }
+
+    .years {
+        grid-area: years;
+    }
+    
+    .form-group .row {
+        display: grid;
+        grid-template-rows: 1fr;
+        grid-template-columns: auto 1fr;
+        gap: 0.5rem;
+        align-items: center;
+    }
+}
+
+.row {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr auto;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+select option p {
+    color: white;
+    margin: 0;
+}
+
+.new-row-button {
+    position: relative;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    background-color: $dark-green;
+    border: none;
+
+    &:hover {
+        cursor: pointer;
+        filter: brightness(1.1);
+    }
+
+    i {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        color: $white;
+        height: 100%;
+        width: 100%;
+    }
+}
+
+input[type='checkbox'] {
+    position: relative;
+    height: 1rem;
+    width: 1rem;
+    border-radius: 5px;
+    border: 1px solid white;
+    accent-color: white;
+    appearance: none;
+    -webkit-appearance: none;
+
+    &:checked {
+        background-color: white;
+        border: 1px solid white;
+
+        &::after {
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            content: "✔";
+            color: $dark-green;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            font-size: 0.65rem;
+        }
+    }
+}
+
+.input-wrapper {
+    position: relative;
+
+    .suffix {
+        position: absolute;
+        bottom: 0.25rem;
+        right: 0.5rem;
+        opacity: 0.8;
+        font-size: 0.9rem;
     }
 }
 
@@ -183,10 +306,22 @@
     }
 }
 
-::ng-deep .mat-mdc-slide-toggle .mdc-switch.mdc-switch--selected:enabled .mdc-switch__handle::after {
+:host ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled):hover .mdc-line-ripple::before {
+    border-bottom-color: white !important;
+}
+
+:host ::ng-deep .mdc-text-field--filled .mdc-line-ripple::after {
+    border-bottom-color: white !important;
+}
+
+:host ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
+    border-bottom-color: white !important;
+}
+
+:host ::ng-deep .mat-mdc-slide-toggle .mdc-switch.mdc-switch--selected:enabled .mdc-switch__handle::after {
     background: $dark-green !important;
 }
 
-::ng-deep .mat-mdc-slide-toggle .mdc-switch:enabled .mdc-switch__track::after {
+:host ::ng-deep .mat-mdc-slide-toggle .mdc-switch:enabled .mdc-switch__track::after {
     background: white !important;
 }

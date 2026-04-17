@@ -10,7 +10,7 @@
            <a [routerLink]="AppUrl.KnowledgeBase" routerLinkActive="active">
                 Tudástár
             </a> 
-            <a [routerLink]="AppUrl.Admin" routerLinkActive="active">
+            <a *ngIf="isAdminShow" [routerLink]="AppUrl.Admin" routerLinkActive="active">
                 Admin
             </a>
         </nav>

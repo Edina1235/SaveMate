@@ -1,0 +1,19 @@
+<div class="card">
+    <div class="header">
+        <div class="title">Bevétel hozzáadása</div>
+        <i class="fa-solid fa-xmark" (click)="onClickClose()"></i>
+    </div>
+    <div class="content">
+        <form [formGroup]="incomeGroup">
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <input id="saved-amount" type="number" formControlName="income"/>
+                    <span class="suffix">Ft</span>
+                </div>
+            </div>
+        </form>
+        <div class="button-container">
+            <button (click)="onClickSave()">Kész</button>
+       </div>
+    </div>
+</div>

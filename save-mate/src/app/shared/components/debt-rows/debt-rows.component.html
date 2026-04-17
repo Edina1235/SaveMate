@@ -21,6 +21,13 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="monthly-amount">Kifizetve</label>
+                    <div class="input-wrapper">
+                        <input id="monthly-amount" type="number" [formControlName]="'paidAmount_' + index"/>
+                        <span class="suffix">Ft</span>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="interest">Kamat</label>
                     <div class="input-wrapper">
                         <input id="interest" type="number" [formControlName]="'interest_' + index"/>

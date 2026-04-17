@@ -1,6 +1,9 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { HeaderService } from 'src/app/core/components/header/header.service';
 import { NotificationCategory } from 'src/app/core/enums/notification-category.enum';
 import { Notification } from 'src/app/core/models/notification';
+import { NotificationService } from 'src/app/core/services/notification.service';
+import { ToastService } from 'src/app/core/services/toast.service';
 
 @Component({
   selector: 'app-notifications',
@@ -9,43 +12,16 @@ import { Notification } from 'src/app/core/models/notification';
 })
 export class NotificationsComponent implements OnInit {
   public screen: 'mobile' | 'desktop' = 'desktop';
-  public notifications: Notification[] = [{
-    title: 'valami',
-    text: 'k',
-    category: NotificationCategory.MonthlySummary,
-    id: '1',
-    userId: '1',
-    isRead: true,
-    createdAt: new Date()
-  }, {
-    title: 'valami',
-    text: 'k',
-    category: NotificationCategory.Reminders,
-    id: '2',
-    userId: '1',
-    isRead: true,
-    createdAt: new Date()
-  }, {
-    title: 'valami',
-    text: 'k',
-    category: NotificationCategory.Suggestions,
-    id: '3',
-    userId: '1',
-    isRead: true,
-    createdAt: new Date()
-  }, {
-    title: 'valami',
-    text: 'k',
-    category: NotificationCategory.SysmtemMessages,
-    id: '4',
-    userId: '1',
-    isRead: true,
-    createdAt: new Date()
-  }];
+  public notifications: Notification[] = [];
   public categories: NotificationCategory[] = Object.values(NotificationCategory);
   public activeCategory?: NotificationCategory;
 
   public NotificationCategory = NotificationCategory;
+
+  constructor(private notificationService: NotificationService,
+              private headerService: HeaderService,
+              private toastService: ToastService
+  ) {}
 
   @HostListener('window:resize')
   onResize() {
@@ -58,16 +34,27 @@ export class NotificationsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.onResize();
+    this.onResize();
+    this.notificationService.getNotifications().subscribe({next: notifications => {
+      this.notifications = (notifications as Notification[]).reverse();
+    }, error: error => console.error(error)});
   }
 
   public onClickDelete(id: string) {
-    this.notifications = this.notifications.filter(notification => notification.id !== id);
+    this.notificationService.deleteNotification(id).subscribe({next: () => {
+      this.notifications = this.notifications.filter(notification => notification.id !== id);
+      this.headerService.loadNotifications();
+      this.toastService.successToastr("Siker", "Sikeres törlés");
+    }, error: error => console.error(error)});
   }
 
   public onClickReadStatus(id: string) {
     const index = this.notifications.findIndex(notification => notification.id === id);
     this.notifications[index].isRead = !this.notifications[index].isRead;
+    this.notificationService.updateNotification(id, this.notifications[index]).subscribe({next: () => {
+      this.headerService.loadNotifications();
+      this.toastService.successToastr("Siker", "Sikeres állapotfrissítés");
+    }, error: error => console.error(error)});
   }
 
   public onClickCategory(category: NotificationCategory) {

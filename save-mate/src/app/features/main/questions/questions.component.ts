@@ -10,9 +10,7 @@ import { QuestionsService } from './questions.service';
 export class QuestionsComponent {
   public QuestionSteps = QuestionSteps;
 
-  constructor(private questionsService: QuestionsService) {
-
-  }
+  constructor(private questionsService: QuestionsService) {}
 
   public get activeStep() {
     return this.questionsService.activeStep;

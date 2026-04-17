@@ -11,7 +11,7 @@
             <ng-container *ngIf="message.senderType === SenderType.AI; else user">
                 <div class="ai-answer">
                     <img src="assets/images/piggy-sense-square-icon.png" alt="">
-                    <div class="message">{{message.message}}</div>
+                    <div class="message" [innerHTML]="message.message"></div>
                 </div>
             </ng-container>
             <ng-template #user>
@@ -26,12 +26,20 @@
                 </div>
             </ng-template>
         </ng-container>
+        <div class="ai-answer" *ngIf="loading">
+            <img src="assets/images/piggy-sense-square-icon.png" alt="">
+            <div class="message">
+                <div class="dots">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="footer">
         <form [formGroup]="formGroup">
             <textarea name="" id="" placeholder="Üzenet..." formControlName="message"></textarea>
         </form>
-        <button (click)="onClickSend()" [disabled]="formGroup.invalid">
+        <button (click)="onClickSend()" [disabled]="formGroup.invalid || loading">
             <i class="fa-solid fa-paper-plane"></i>
         </button>
     </div>

@@ -23,11 +23,12 @@ router.get("/", authMiddleware, async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const data = req.body;
-    const docRef = await db.collection("knowledgeBase").add(data);
+    const { id, ...dataWithoutId } = data;
+    const docRef = await db.collection("knowledgeBase").add(dataWithoutId);
 
     res.json({
       id: docRef.id,
-      ...data
+      ...dataWithoutId
     });
 
   } catch (err) {

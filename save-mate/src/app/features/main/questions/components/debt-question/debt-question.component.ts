@@ -23,6 +23,7 @@ export class DebtQuestionComponent {
   }
 
   public onClickFinish() {
+    this.questionsService.finish();
     this.router.navigateByUrl(AppUrl.Home);
   }
 

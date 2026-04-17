@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { QuestionsService } from '../../questions.service';
 import { QuestionSteps } from 'src/app/core/enums/question-steps.enum';
 import { DebtInput } from 'src/app/core/models/debt-input';
@@ -9,11 +8,26 @@ import { DebtInput } from 'src/app/core/models/debt-input';
   templateUrl: './debts.component.html',
   styleUrls: ['./debts.component.scss']
 })
-export class DebtsComponent {
+export class DebtsComponent implements OnInit {
   public isValidGroup: boolean = false;
   public debtInputs: DebtInput[] = [];
 
   constructor(private questionsService: QuestionsService) { }
+
+  ngOnInit(): void {
+    if(this.questionsService.debts) {
+      this.debtInputs = [];
+      this.questionsService.debts.forEach(debt => {
+        this.debtInputs.push({
+          name: debt.name,
+          totalAmount: debt.totalAmount,
+          monthlyPayment: debt.monthlyPayment,
+          interest: debt.interest,
+          paidAmount: debt.paidAmount
+        });
+      });
+    }
+  }
 
   public invalidChange(event: boolean) {
     this.isValidGroup = event;
@@ -29,6 +43,7 @@ export class DebtsComponent {
   }
 
   public onClickPrevious() {
+    this.questionsService.setDebts(this.debtInputs);
     this.questionsService.activeStep = QuestionSteps.DebtQuestion;
   }
 }

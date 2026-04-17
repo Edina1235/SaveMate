@@ -1,40 +1,60 @@
-<div class="profil-container">
+<div *ngIf="user" class="profil-container">
     <div class="profil">
         <div class="modification-container" (click)="onClickModification()">
             <i class="fa-solid fa-pen"></i>
         </div>
         <div class="header">
-            <app-monogram></app-monogram>
+            <ng-container *ngIf="user.avatarId; else monogram">
+                <img [src]="user.avatarId" alt="Avatar Image">
+            </ng-container>
+            <ng-template #monogram>
+                <app-monogram [firstName]="user.firstname"
+                            [lastName]="user.lastname"></app-monogram>
+            </ng-template>
             <div class="contact">
-                <span class="name">Tóth Edina</span>
-                <span class="email">tothedina2003@gmail.com</span>
+                <span class="name">{{user.lastname}} {{user.firstname}}</span>
+                <span class="email">{{user.email}}</span>
             </div>
         </div>
         <div class="content">
             <div class="row">
                 <p class="label">Havi jövedelem</p>
-                <span>{{450000 | thousandSpace}} Ft</span>
+                <ng-container *ngIf="incomes; else emptyIncome">
+                    <span>{{incomes[incomes.length - 1].amount | thousandSpace}} Ft</span>
+                </ng-container>
+                <ng-template #emptyIncome>
+                    <span>-</span>
+                </ng-template>
             </div>
             <div class="row">
                 <p class="label">Megtakarítás</p>
-                <span>{{120000 | thousandSpace}} Ft</span>
+                <ng-container *ngIf="goals; else emptyGoal">
+                    <span>{{savedAmount | thousandSpace}} Ft</span>
+                </ng-container>
+                <ng-template #emptyGoal>
+                    <span>-</span>
+                </ng-template>
             </div>
             <div class="row">
                 <p class="label">Fix költség</p>
                 <span class="icons">
-                    <i [class]="spendingCategoriesIcon.ChildrenPerFamily"></i>
-                    <i [class]="spendingCategoriesIcon.ChildrenPerFamily"></i>
-                    <i [class]="spendingCategoriesIcon.ChildrenPerFamily"></i>
-                    <i [class]="spendingCategoriesIcon.ChildrenPerFamily"></i>
+                    <ng-container  *ngFor="let fixSpendingCategory of user.fixSpendingCategories">
+                        <i [class]="getFixSpendingCategoriesIcon(fixSpendingCategory)"></i>
+                    </ng-container>
                 </span>
             </div>
             <div class="row">
                 <p class="label">Kitűzött spórolási táv</p>
-                <span>10 év</span>
+                <ng-container *ngIf="goals && goals[0].deadline !== undefined; else emptyDeadline">
+                    <span>{{goals[0].deadline | date:'yyyy.MM.dd.'}}</span>
+                </ng-container>
+                <ng-template #emptyDeadline>
+                    <span>-</span>
+                </ng-template>
             </div>
             <div class="row">
                 <p class="label">Értesítések engedélyezése</p>
-                <mat-slide-toggle [checked]="isNotificationEnabled"
+                <mat-slide-toggle [checked]="user.isGlobalNotificationsEnabled"
                                   [color]="'green'"
                                   [disabled]="true">
 
@@ -42,19 +62,33 @@
             </div>
             <div class="row">
                 <p class="label">Spórolás célja</p>
-                <span>Ház / lakás</span>
+                <div class="goals">
+                    <ng-container *ngIf="goals && goals[0].target; else emptyGoal">
+                        <ng-container *ngFor="let goal of goals[0].target">
+                            <span>{{goal}}</span>
+                        </ng-container>
+                    </ng-container>
+                    <ng-template #emptyGoal>
+                        <span>-</span>
+                    </ng-template>
+                </div>
             </div>
             <div class="row">
                 <p class="label">Tartozások</p>
                 <div class="debts">
-                    <ng-container *ngFor="let debt of debts">
-                        <div class="debt">
-                            <span class="name">{{debt.name}}</span>
-                            <span class="data">{{debt.totalAmount | thousandSpace}} Ft</span>
-                            <span class="data">{{debt.monthlyPayment | thousandSpace}} Ft/hó</span>
-                            <span class="data">{{debt.interest}}%</span>
-                        </div>
+                    <ng-container *ngIf="debts; else emptyDebt">
+                        <ng-container *ngFor="let debt of debts">
+                            <div class="debt">
+                                <span class="name">{{debt.name}}</span>
+                                <span class="data">{{debt.totalAmount | thousandSpace}} Ft</span>
+                                <span class="data">{{debt.monthlyPayment | thousandSpace}} Ft/hó</span>
+                                <span class="data">{{debt.interest}}%</span>
+                            </div>
+                        </ng-container>
                     </ng-container>
+                    <ng-template #emptyDebt>
+                        <span>-</span>
+                    </ng-template>
                 </div>
             </div>
         </div>

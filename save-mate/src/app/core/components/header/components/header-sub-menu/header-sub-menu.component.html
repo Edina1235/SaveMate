@@ -1,12 +1,12 @@
-<div class="header-sub-menu-container">
+<div *ngIf="user" class="header-sub-menu-container">
     <div class="header">
-        <ng-container *ngIf="false else monogram">
-            <img src="" alt="">
+        <ng-container *ngIf="user.avatarId; else monogram">
+            <img [src]="user.avatarId" alt="Avatar Image">
         </ng-container>
         <ng-template #monogram>
-            <app-monogram [firstName]="'Edina'" [lastName]="'tóth'"></app-monogram>
+            <app-monogram [firstName]="user.firstname" [lastName]="user.lastname"></app-monogram>
         </ng-template>
-        <div class="name">Tóth Edina</div>
+        <div class="name">{{ user.lastname }} {{ user.firstname }}</div>
     </div>
     <div class="navigation">
         <nav>
@@ -16,7 +16,7 @@
             </button>
             <a [routerLink]="AppUrl.Profil" (click)="onClickProfil()">Profil</a>
             <a [routerLink]="AppUrl.Settings" (click)="onClickSettings()">Beállítások</a>
-            <a [routerLink]="AppUrl.Notifications" (click)="onClickNotifications()">Értesítések<div class="notification-sign"></div></a>
+            <a [routerLink]="AppUrl.Notifications" (click)="onClickNotifications()">Értesítések<div *ngIf="hasUnreadNotifications" class="notification-sign"></div></a>
             <a [routerLink]="AppUrl.Contact" (click)="onClickContact()">Kapcsolat</a>
             <button (click)="onClickLogout()">Kijelentkezés</button>
         </nav>

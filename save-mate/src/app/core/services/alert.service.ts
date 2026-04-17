@@ -14,6 +14,10 @@ export class AlertService {
     return this.http.get(`${this.backendLink}/${id}`);
   }
 
+  public getAlertByUserId(userId: string) {
+    return this.http.get(`${this.backendLink}/user/${userId}`);
+  }
+
   public getAlerts() {
     return this.http.get(this.backendLink);
   }

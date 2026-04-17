@@ -1,12 +1,16 @@
 <div class="card">
     <div class="header">
-        <div class="title">Költés hozzáadása</div>
+        <div class="title">{{data}}</div>
         <i class="fa-solid fa-xmark" (click)="onClickClose()"></i>
     </div>
     <div class="content">
-        <app-expenses-row></app-expenses-row>
+        <app-expenses-row [expenses]="expensesInput" 
+                            (expensesOutput)="setExpenses($event)"
+                            (expensesCsvOutput)="setExpensesCsv($event)"
+                            (incomes)="setIncomes($event)"
+                            (validGroup)="setValidForm($event)"></app-expenses-row>
         <div class="button-container">
-            <button (click)="onClickSave()">Kész</button>
+            <button [disabled]="!validForm" (click)="onClickSave()">Kész</button>
        </div>
     </div>
 </div>

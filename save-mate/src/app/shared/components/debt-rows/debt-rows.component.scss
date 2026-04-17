@@ -9,8 +9,13 @@ form {
     overflow: hidden;
 
     &.white {
-        .fa-trash-can {
+        .rows .row .fa-trash-can {
             color: white;
+
+            &:hover {
+                cursor: pointer;
+                color: $delete-btn-color;
+            }
         }
 
         .new-row-container {
@@ -41,13 +46,19 @@ form {
 
             input {
                 border-bottom: 1px solid white;
+                color: white;
             }
         }
     }
 
     &.dark-green {
-        .fa-trash-can {
+        .rows .row .fa-trash-can {
             color: $dark-green;
+
+            &:hover {
+                cursor: pointer;
+                color: $delete-btn-color;
+            }
         }
 
         .new-row-container {
@@ -97,6 +108,11 @@ form {
         border-radius: 50%;
         background-color: $dark-green;
         border: none;
+
+        &:hover {
+            cursor: pointer;
+            filter: brightness(1.1);
+        }
 
         i {
             position: absolute;

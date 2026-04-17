@@ -56,7 +56,6 @@ export class SignUpComponent {
         firstname: this.firstName,
         lastname: this.lastName,
         nickname: this.userName,
-        passwordHash: this.password,
         registrationDate: new Date(),
         lastLoginDate: new Date(),
         isGlobalNotificationsEnabled: true,
@@ -66,10 +65,9 @@ export class SignUpComponent {
         role: Role.User,
         avatarId: null
       }
-      console.log(user);
-      this.userService.setUser(user).subscribe(user => console.log(user));
+      this.userService.setUser(user).subscribe({error: error => console.error(error)});
+      this.afAuth.signInWithEmailAndPassword(this.email, this.password).then(() => this.router.navigateByUrl(AppUrl.Questions));
     });
-    this.router.navigateByUrl(AppUrl.Questions);
   }
 
   public signup(email: string, password: string) {

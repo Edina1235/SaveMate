@@ -14,6 +14,7 @@ import { MainComponent } from './features/main/main.component';
 import { QuestionsModule } from 'src/app/features/main/questions/questions.module';
 import { AdminModule } from 'src/app/features/main/admin/admin.module';
 import { AdminGuard } from './core/guards/admin.guard';
+import { UserGuard } from './core/guards/user.guard';
 
 const routes: Routes = [
   {path: '', component: MainComponent, canActivate: [AuthGuard], children: [
@@ -25,7 +26,7 @@ const routes: Routes = [
     {path: 'profil', loadChildren: () => import('src/app/features/main/profil/profil.module').then(m => ProfilModule)},
     {path: 'settings', loadChildren: () => import('src/app/features/main/settings/settings.module').then(m => SettingsModule)},
     {path: 'statistics', loadChildren: () => import('src/app/features/main/statistics/statistics.module').then(m => StatisticsModule)},
-    {path: 'questions', loadChildren: () => import('src/app/features/main/questions/questions.module').then(m => QuestionsModule)},
+    {path: 'questions', loadChildren: () => import('src/app/features/main/questions/questions.module').then(m => QuestionsModule), canActivate: [UserGuard]},
   ]},
   {path: 'login', component: LoginComponent},
   {path: 'sign-up', component: SignUpComponent},

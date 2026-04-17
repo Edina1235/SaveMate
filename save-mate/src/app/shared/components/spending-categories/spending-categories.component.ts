@@ -19,16 +19,18 @@ export class SpendingCategoriesComponent implements OnInit {
 
   ngOnInit(): void {
     for(let i = 0; i < this.categories.length; i++) {
+      if(this.activeCategories.includes(this.categories[i]))
+        this.spendingCategoriesGroup.addControl(`${i}`, new FormControl('true'));
       this.spendingCategoriesGroup.addControl(`${i}`, new FormControl(''));
     }
 
-    this.spendingCategoriesGroup.valueChanges.subscribe(categoryValues => {
+    this.spendingCategoriesGroup.valueChanges.subscribe({next: categoryValues => {
       this.activeCategories = [];
       Object.keys(categoryValues).forEach(key => {
         if(categoryValues[key]) this.activeCategories.push(this.categories[Number(key)]);
       });
       this.selectedCategories.emit(this.activeCategories);
-    });
+    }, error: error => console.error(error)});
   }
 
   public onClickArrow(category: SpendingCategoriesName) {

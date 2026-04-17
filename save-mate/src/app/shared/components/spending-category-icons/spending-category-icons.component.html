@@ -1,8 +1,8 @@
 <div class="spending-categories-container">
-    <form>
+    <form [formGroup]="formGroup">
         <ng-container *ngFor="let icon of spendingCategoryIcons">
-            <input type="checkbox">
-            <i [class]="icon"></i>
+            <input id="category_{{ spendingCategoryIcons.indexOf(icon) }}" type="checkbox" [formControlName]="'category_' + spendingCategoryIcons.indexOf(icon)">
+            <label for="category_{{ spendingCategoryIcons.indexOf(icon) }}"> <i [class]="icon"></i></label>
         </ng-container>
     </form>
 </div>

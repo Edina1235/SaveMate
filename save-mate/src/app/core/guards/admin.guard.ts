@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { map, Observable, take } from 'rxjs';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { map, Observable, of, switchMap, take } from 'rxjs';
 import { UserService } from '../services/user.service';
-import { Role } from '../models/user';
+import { Role, User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -11,23 +11,36 @@ import { Role } from '../models/user';
 export class AdminGuard implements CanActivate {
 
   constructor(private afAuth: AngularFireAuth,
-              private userService: UserService
+              private userService: UserService,
+              private router: Router
   ) {}
   
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.afAuth.authState.pipe(
-            take(1),
-            map(user => {
-              if(user) {
-                /*const userRole = this.userService.getUser("").role;
-                if(userRole === Role.Admin)
-                  return true;*/
+      take(1),
+      switchMap(user => {
+        if (!user) {
+          this.router.navigateByUrl('/login');
+          return of(false);
+        }
+
+        return this.userService.getUser(user.uid).pipe(
+          map(user => {
+            if (user) {
+              const role = (user as User).role;
+
+              if (role === Role.Admin) {
+                return true;
               }
-              return false;
-            })
-          );
+            }
+
+            this.router.navigateByUrl('/');
+            return false;
+          })
+        );
+      })
+    );
   }
-  
 }

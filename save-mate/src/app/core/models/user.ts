@@ -7,7 +7,6 @@ export interface User {
     firstname: string;
     lastname: string;
     nickname: string;
-    passwordHash: string;
     avatarId: string | null;
     registrationDate: Date;
     lastLoginDate: Date;

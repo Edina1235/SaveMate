@@ -7,38 +7,70 @@ import { Expense } from 'src/app/core/models/expense';
 import { ExpenseInput } from 'src/app/core/models/expense-input';
 import { Goal } from 'src/app/core/models/goal';
 import { Income } from 'src/app/core/models/income';
-import { Role, User } from 'src/app/core/models/user';
+import { RecurringExpense } from 'src/app/core/models/recurring-expense';
+import { SavedAmount } from 'src/app/core/models/saved-amont';
+import { User } from 'src/app/core/models/user';
+import { DebtService } from 'src/app/core/services/debt.service';
+import { ExpenseService } from 'src/app/core/services/expense.service';
+import { GoalService } from 'src/app/core/services/goal.service';
+import { IncomeService } from 'src/app/core/services/income.service';
+import { RecurringExpenseService } from 'src/app/core/services/recurring-expense.service';
+import { SavedAmountService } from 'src/app/core/services/saved-amount.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuestionsService {
   public activeStep: QuestionSteps = QuestionSteps.Income;
-  private income?: Income;
-  private goals?: Goal;
-  private expenses: Expense[] = [];
+  public income?: Income;
+  public goals?: Goal;
+  public expenses: Expense[] = [];
+  public recurringExpenses: RecurringExpense[] = [];
   public debts: Debt[] = [];
+  public incomes: Income[] = [];
+  public user!: User;
+  public goalDeadlineYear: number = 0;
+  public savedAmount?: SavedAmount;
 
-  constructor() { }
+  constructor(private userService: UserService,
+              private incomeService: IncomeService,
+              private goalsService: GoalService,
+              private expensesService: ExpenseService,
+              private debtService: DebtService,
+              private savedAmountService: SavedAmountService,
+              private recurringExpenseService: RecurringExpenseService
+  ) { }
 
   public setIncome(amount: number) {
     this.income = {
       id: '',
-      userid: this.user.id,
+      userId: this.user.id,
       amount: amount,
       date: new Date(),
-      source: 'fizetés'
+      source: 'Fizetés'
     };
   }
 
+  public setIncomes(incomes: Income[]) {
+    this.incomes = [];
+    incomes.forEach(income => {
+      this.incomes.push({
+        userId: this.user.id,
+        id: income.id,
+        amount: income.amount,
+        date: income.date,
+        source: income.source
+      });
+    });
+  }
+
   public setGoalSavedAmount(savedAmount: number) {
-    this.goals = {
+    this.savedAmount = {
       id: '',
       userId: this.user.id,
-      target: [],
-      targetAmount: 0,
-      savedAmount: savedAmount,
-      deadline: new Date()
+      amount: savedAmount,
+      date: new Date()
     };
   }
 
@@ -48,6 +80,7 @@ export class QuestionsService {
   }
 
   public setGoalDeadline(years: number) {
+    this.goalDeadlineYear = years;
     const deadline = this.getDateWithPlus(years);
     this.goals!.deadline = deadline;
   }
@@ -62,20 +95,56 @@ export class QuestionsService {
   }
 
   public setExpenses(expenseInputs: ExpenseInput[]) {
+    if(expenseInputs.length === 0 || [0, ""].includes(expenseInputs[0].amount)) return;
     const previousMonthDate = new Date();
+    this.expenses = [];
     previousMonthDate.setMonth(previousMonthDate.getMonth() - 1);
     expenseInputs.forEach((expenseInput) => {
-      this.expenses.push({
-        id: '',
-        userId: this.user.id,
-        amount: expenseInput.amount,
-        category: expenseInput.category,
-        date: previousMonthDate
-      });
+      if(this.user.fixSpendingCategories.includes(expenseInput.category)) {
+        this.recurringExpenses.push({
+          id: '',
+          userId: this.user.id,
+          category: expenseInput.category,
+          amount: expenseInput.amount,
+          date: new Date()
+        });
+      } else {
+        this.expenses.push({
+          id: '',
+          userId: this.user.id,
+          amount: expenseInput.amount,
+          category: expenseInput.category,
+          date: previousMonthDate
+        });
+      }
+    });
+  }
+
+  public setExpensesCsv(expenses: Expense[]) {
+    this.expenses = [];
+    expenses.forEach(expense => {
+      if(this.user.fixSpendingCategories.includes(expense.category as SpendingCategoriesName)) {
+        this.recurringExpenses.push({
+          userId: this.user.id,
+          id: expense.id,
+          amount: expense.amount,
+          category: expense.category,
+          date: expense.date
+        });
+      } else {
+        this.expenses.push({
+          userId: this.user.id,
+          id: expense.id,
+          amount: expense.amount,
+          category: expense.category,
+          date: expense.date
+        });
+      }
     });
   }
 
   public setDebts(debtInputs: DebtInput[]) {
+    this.debts = [];
     debtInputs.forEach((debtInput) => {
       const years = debtInput.totalAmount / debtInput.monthlyPayment;
       this.debts.push({
@@ -83,6 +152,7 @@ export class QuestionsService {
         userId: this.user.id,
         name: debtInput.name,
         totalAmount: debtInput.totalAmount,
+        paidAmount: debtInput.paidAmount,
         monthlyPayment: debtInput.monthlyPayment,
         interest: debtInput.interest,
         dueDate: this.getDateWithPlus(years),
@@ -92,6 +162,64 @@ export class QuestionsService {
     });
   }
 
+  public setDebtsHasArrears(name: string, hasArrears: boolean) {
+    this.debts.forEach(debt => {
+      if(debt.name === name) debt.hasArrears = hasArrears;
+    });
+  }
+
+  public finish() {
+    this.updateUser();
+    this.addExpenses();
+    this.addRecurringExpenses();
+    this.addDebts();
+    this.addGoal();
+    this.addIncome();
+    this.setSavedAmount();
+  }
+
+  private setSavedAmount() {
+    if(this.savedAmount)
+    this.savedAmountService.setSavedAmount(this.savedAmount).subscribe({error: error => console.error(error)});
+  }
+
+  private updateUser() {
+    this.userService.updateUser(this.user.id, this.user).subscribe({error: error => console.error(error)});
+  }
+
+  private addExpenses() {
+    this.expenses.forEach(expense => {
+      this.expensesService.setExpense(expense).subscribe({error: error => console.error(error)});
+    });
+  }
+
+  private addRecurringExpenses() {
+    this.recurringExpenses.forEach(expense => {
+      this.recurringExpenseService.setRecurringExpense(expense).subscribe({error: error => console.error(error)});
+    });
+  }
+
+  private addDebts() {
+    this.debts.forEach(debt => {
+      this.debtService.setDebt(debt).subscribe({error: error => console.error(error)});
+    });
+  }
+
+  private addGoal() {
+    if(this.goals)
+      this.goalsService.setGoal(this.goals).subscribe({error: error => console.error(error)});
+  }
+
+  private addIncome() {
+    if(this.income)
+      this.incomeService.setIncome(this.income).subscribe({error: error => console.error(error)});
+    
+    if(this.incomes)
+      this.incomes.forEach(income => {
+        this.incomeService.setIncome(income).subscribe({error: error => console.error(error)});
+      });
+  }
+
   private getDateWithPlus(years: number): Date {
     const date = new Date();
     const plusYears = Math.floor(years);
@@ -99,25 +227,5 @@ export class QuestionsService {
     date.setMonth(date.getMonth() + plusMonths);
     date.setFullYear(date.getFullYear() + plusYears);
     return date;
-  }
-
-  private get user() {
-    return {
-      id: '',
-      email: '',
-      firstname: '',
-      lastname: '',
-      nickname: '',
-      passwordHash: '',
-      avatarId: null,
-      registrationDate: new Date(),
-      lastLoginDate: new Date(),
-      globalNotificationsLastSeenAt: new Date(),
-      isGlobalNotificationsEnabled: true,
-      topSpendingCategories: [],
-      fixSpendingCategories: [],
-      avgMonthlyFixedCosts: 1,
-      role: Role.Admin
-    } as User;
   }
 }

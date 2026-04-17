@@ -23,11 +23,12 @@ router.get("/", authMiddleware, async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const data = req.body;
-    const docRef = await db.collection("alerts").add(data);
+    const { id, ...dataWithoutId } = data;
+    const docRef = await db.collection("alerts").add(dataWithoutId);
 
     res.json({
       id: docRef.id,
-      ...data
+      ...dataWithoutId
     });
 
   } catch (err) {
@@ -51,6 +52,29 @@ router.get("/:id", async (req, res) => {
       ...doc.data()
     });
 
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.get("/user/:userId", async (req, res) => {
+  try {
+    const snapshot = await db
+      .collection("alerts")
+      .where("userId", "==",req.params.userId)
+      .get();
+
+    if (snapshot.empty) {
+      return res.status(404).json({ message: "Alerts not found" });
+    }
+
+    const alerts = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+
+    res.json(alerts);
+    
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
